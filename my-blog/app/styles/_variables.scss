@@ -27,8 +27,13 @@ $color-cat-quality: $color-red;
 $font-body: "noto-regular", sans-serif;
 $font-code: "code", monospace;
 
+// Breakpoints
+$bp-tablet: 768px;
+$bp-mobile: 480px;
+
 // Spacing
 $section-padding: 100px;
+$section-padding-mobile: 15px;
 
 // ==========================================
 // Mixins
@@ -71,5 +76,9 @@ $section-padding: 100px;
     margin: 0 auto;
     margin-top: 80px;
     background: linear-gradient(90deg, transparent, $color-gray-2, transparent);
+
+    @media (max-width: $bp-tablet) {
+      margin-top: 40px;
+    }
   }
 }

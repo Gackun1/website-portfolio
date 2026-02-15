@@ -17,10 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
+        <SideMenu />
         <div className={styles.container}>
-          <div className={styles.sidebar}>
-            <SideMenu />
-          </div>
+          <div className={styles.sidebar} />
           <div className={styles.content}>
             {children}
             <Footer />

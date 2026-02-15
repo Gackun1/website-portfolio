@@ -4,7 +4,10 @@
   position: relative;
   display: grid;
   grid-template-columns: 150px 1fr;
-  min-width: 1000px;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .sidebar {
@@ -16,10 +19,18 @@
   height: 100vh;
   width: auto;
   background: $color-black-2;
+
+  @media (max-width: $bp-tablet) {
+    display: none;
+  }
 }
 
 .content {
   z-index: 1;
   grid-column: 2 / 3;
   background: $color-bg-primary;
+
+  @media (max-width: $bp-tablet) {
+    grid-column: 1 / -1;
+  }
 }

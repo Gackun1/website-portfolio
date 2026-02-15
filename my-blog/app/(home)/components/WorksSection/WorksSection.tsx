@@ -69,7 +69,7 @@ export default function WorksSection() {
         )}
       </AnimatedPopup>
 
-      <ScrollReveal>
+      <ScrollReveal className={styles.cWorksButton}>
         <TerminalButton label="もっと見る" />
       </ScrollReveal>
     </>

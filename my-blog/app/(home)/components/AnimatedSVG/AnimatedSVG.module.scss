@@ -1,4 +1,4 @@
-$color-blue: #66d9ef;
+@use "../../../styles/variables" as *;
 
 .svgContainer {
   z-index: 0;
@@ -7,6 +7,13 @@ $color-blue: #66d9ef;
   top: 5vh;
   width: 100vh;
   height: 100vh;
+
+  @media (max-width: $bp-tablet) {
+    width: 80vw;
+    height: 80vw;
+    top: 10vh;
+    opacity: 0.5;
+  }
 }
 
 .animatedSvg {

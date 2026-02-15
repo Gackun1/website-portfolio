@@ -17,6 +17,10 @@
     background: linear-gradient(180deg, $color-green, transparent);
     border-radius: 3px;
   }
+
+  @media (max-width: $bp-tablet) {
+    font-size: 32px;
+  }
 }
 
 .green {

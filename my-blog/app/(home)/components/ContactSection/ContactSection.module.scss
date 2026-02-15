@@ -3,6 +3,10 @@
 .cSection {
   padding: $section-padding;
   background: $color-bg-primary;
+
+  @media (max-width: $bp-tablet) {
+    padding: $section-padding-mobile;
+  }
 }
 
 .cSectionDescription {
@@ -32,6 +36,10 @@
   grid-template-columns: 50% calc(50% - 30px);
   grid-gap: 30px;
   color: $color-white;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .cContactForm {
@@ -95,6 +103,10 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-family: $font-code;
   font-size: 18px;
+
+  @media (max-width: $bp-tablet) {
+    max-height: 300px;
+  }
 }
 
 .terminalDots {

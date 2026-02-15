@@ -6,6 +6,15 @@
   height: 100vh;
   padding: $section-padding;
   box-sizing: border-box;
+
+  @media (max-width: $bp-tablet) {
+    padding: $section-padding-mobile;
+    height: 110vw;
+  }
+
+  @media (max-width: $bp-mobile) {
+    height: 120vw;
+  }
 }
 
 .cTopSectionHeading {
@@ -14,6 +23,12 @@
   bottom: $section-padding;
   left: $section-padding;
   font-size: 3.5vw;
+
+  @media (max-width: $bp-tablet) {
+    bottom: $section-padding-mobile;
+    left: $section-padding-mobile;
+    font-size: 6vw;
+  }
 }
 
 // Typing animations
@@ -46,27 +61,45 @@
 }
 
 @keyframes typingSize6 {
-  from { width: 0; }
-  to { width: 12vw; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 3.45em;
+  }
 }
 
 @keyframes typingSize12 {
-  from { width: 0; }
-  to { width: 22vw; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 6.3em;
+  }
 }
 
 @keyframes typingSize20 {
-  from { width: 0; }
-  to { width: 48vw; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 13.5em;
+  }
 }
 
 @keyframes cursor {
-  50% { border-color: $color-white; }
+  50% {
+    border-color: $color-white;
+  }
 }
 
 @keyframes cursorNone {
-  from { border-color: transparent; }
-  to { border-color: $color-white; }
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: $color-white;
+  }
 }
 
 .uColorRed {

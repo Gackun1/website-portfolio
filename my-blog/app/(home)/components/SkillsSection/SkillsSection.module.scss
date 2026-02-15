@@ -4,17 +4,29 @@
   padding: $section-padding;
   background: $color-bg-secondary;
   @include section-divider;
+
+  @media (max-width: $bp-tablet) {
+    padding: 50px $section-padding-mobile;
+  }
 }
 
 .cSkills {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+
+  @media (max-width: $bp-mobile) {
+    gap: 24px;
+  }
 }
 
 .cSkillsItem {
   flex: 1;
   min-width: 200px;
+
+  @media (max-width: $bp-mobile) {
+    min-width: 100%;
+  }
 }
 
 .cSkillsHeading {
