@@ -1,30 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
 import StaggerContainer from "../../../components/motion/StaggerContainer";
 import StaggerItem from "../../../components/motion/StaggerItem";
 import AnimatedPopup from "../../../components/motion/AnimatedPopup";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import TerminalButton from "../../../components/TerminalButton/TerminalButton";
+import type { WorkItem } from "../../../lib/works";
 import styles from "./WorksSection.module.scss";
 
-type WorkItem = {
-  image: string;
-  category: string;
-  title: string;
-  fullImage: string;
+type Props = {
+  works: WorkItem[];
 };
 
-const works: WorkItem[] = [
-  { image: "/img/works01.jpg", category: "web site", title: "Labe", fullImage: "/img/works01_full.png" },
-  { image: "/img/works02.jpg", category: "web site", title: "HAL幼稚園", fullImage: "/img/works02_full.png" },
-  { image: "/img/works03.jpg", category: "web site", title: "越後妻有", fullImage: "/img/works03_full.png" },
-  { image: "/img/works04.png", category: "web site", title: "Studio Zero", fullImage: "/img/works04_full.png" },
-  { image: "/img/works05.png", category: "web app", title: "Group Work", fullImage: "/img/works05_full.png" },
-];
-
-export default function WorksSection() {
+export default function WorksSection({ works }: Props) {
   const [openPopup, setOpenPopup] = useState<number | null>(null);
 
   return (
@@ -35,7 +26,7 @@ export default function WorksSection() {
           <div className={styles.description}>
             私の制作実績です。
             <br />
-            全て見るには<a href="#">一覧ページ</a>にアクセスしてください！
+            全て見るには<Link href="/works">一覧ページ</Link>にアクセスしてください！
           </div>
         </ScrollReveal>
       </section>
@@ -70,7 +61,7 @@ export default function WorksSection() {
       </AnimatedPopup>
 
       <ScrollReveal className={styles.moreButton}>
-        <TerminalButton label="もっと見る" />
+        <TerminalButton label="もっと見る" href="/works" />
       </ScrollReveal>
     </>
   );

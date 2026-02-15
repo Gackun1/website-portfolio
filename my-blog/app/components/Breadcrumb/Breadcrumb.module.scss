@@ -1,0 +1,43 @@
+@use "../../styles/variables" as *;
+
+.nav {
+  margin-bottom: 30px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: $font-code;
+  font-size: 13px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  margin: 0 8px;
+  color: $color-gray-2;
+}
+
+.link {
+  color: $color-gray-1;
+  transition: color 0.3s ease;
+
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    color: $color-green;
+  }
+}
+
+.current {
+  color: $color-gray-3;
+}

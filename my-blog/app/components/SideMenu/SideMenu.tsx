@@ -1,23 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./SideMenu.module.scss";
 
 const navItems = [
-  { href: "#about", label: "About" },
-  { href: "#skill", label: "Skill" },
-  { href: "#works", label: "Works" },
-  { href: "#blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+  { id: "about", label: "About" },
+  { id: "skill", label: "Skill" },
+  { id: "works", label: "Works" },
+  { id: "blog", label: "Blog" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function SideMenu() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [activeSection, setActiveSection] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const sectionIds = ["about", "skill", "works", "blog", "contact"];
+    if (!isHome) {
+      setActiveSection("");
+      return;
+    }
+
+    const sectionIds = navItems.map((item) => item.id);
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -40,7 +50,7 @@ export default function SideMenu() {
     });
 
     return () => observers.forEach((o) => o.disconnect());
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     if (isOpen) {
@@ -55,21 +65,31 @@ export default function SideMenu() {
 
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    sectionId: string
   ) => {
+    if (!isHome) return; // 下層ページではNext.jsナビゲーションに任せる
+
     e.preventDefault();
-    const targetElement = document.querySelector(href);
+    const targetElement = document.getElementById(sectionId);
     if (targetElement) {
       const rectTop = targetElement.getBoundingClientRect().top;
       const offsetTop = window.pageYOffset;
       const top = rectTop + offsetTop;
-      window.scrollTo({
-        top,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top, behavior: "smooth" });
     }
     setIsOpen(false);
   };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isHome) return;
+
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsOpen(false);
+  };
+
+  const getNavHref = (sectionId: string) =>
+    isHome ? `#${sectionId}` : `/#${sectionId}`;
 
   return (
     <>
@@ -88,17 +108,16 @@ export default function SideMenu() {
       <div className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ""}`}>
         <nav className={styles.overlayNav}>
           {navItems.map((item) => {
-            const sectionId = item.href.replace("#", "");
-            const isActive = activeSection === sectionId;
+            const isActive = isHome && activeSection === item.id;
             return (
-              <a
-                key={item.href}
-                href={item.href}
+              <Link
+                key={item.id}
+                href={getNavHref(item.id)}
                 className={`${styles.overlayNavItem} ${isActive ? styles.active : ""}`}
-                onClick={(e) => handleSmoothScroll(e, item.href)}
+                onClick={(e) => handleSmoothScroll(e, item.id)}
               >
                 {item.label}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -107,20 +126,19 @@ export default function SideMenu() {
       {/* Desktop sidebar menu */}
       <header className={styles.sidebar}>
         <div className={styles.logo}>
-          <a href="#top" onClick={(e) => handleSmoothScroll(e, "#top")}>
+          <Link href="/" onClick={handleLogoClick}>
             <img src="/img/logo.png" alt="" />
-          </a>
+          </Link>
         </div>
         <nav className={styles.nav}>
           {navItems.map((item) => {
-            const sectionId = item.href.replace("#", "");
-            const isActive = activeSection === sectionId;
+            const isActive = isHome && activeSection === item.id;
             return (
-              <a
-                key={item.href}
-                href={item.href}
+              <Link
+                key={item.id}
+                href={getNavHref(item.id)}
                 className={`${styles.navItem} ${isActive ? styles.active : ""}`}
-                onClick={(e) => handleSmoothScroll(e, item.href)}
+                onClick={(e) => handleSmoothScroll(e, item.id)}
               >
                 {isActive && (
                   <motion.span
@@ -130,7 +148,7 @@ export default function SideMenu() {
                   />
                 )}
                 <span className={styles.navLabel}>{item.label}</span>
-              </a>
+              </Link>
             );
           })}
         </nav>

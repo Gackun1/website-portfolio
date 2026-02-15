@@ -32,9 +32,7 @@ export default function ContactSection() {
     <section id="contact" className={styles.section}>
       <ScrollReveal>
         <SectionHeading name="contact" args="message" />
-        <div className={styles.description}>
-          制作のご依頼、ご相談などはこちらのフォームからお気軽にお問い合わせください。
-        </div>
+        <div className={styles.description}>制作のご依頼、ご相談などはこちらのフォームからお気軽にお問い合わせください。</div>
       </ScrollReveal>
 
       <ScrollReveal delay={0.2}>
@@ -45,12 +43,7 @@ export default function ContactSection() {
                 <span className={styles.terminalPrefix}>$ </span>
                 お問い合わせ目的
               </label>
-              <select
-                name="inquiry_type"
-                id="inquiry_type"
-                value={formData.inquiryType}
-                onChange={(e) => handleInputChange("inquiryType", e.target.value)}
-              >
+              <select name="inquiry_type" id="inquiry_type" value={formData.inquiryType} onChange={(e) => handleInputChange("inquiryType", e.target.value)}>
                 <option value="">- 選択してください -</option>
                 <option value="works">制作のご依頼</option>
                 <option value="consultation">お見積もり・ご相談</option>
@@ -62,25 +55,14 @@ export default function ContactSection() {
                 <span className={styles.terminalPrefix}>$ </span>
                 お名前
               </label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-              />
+              <input id="name" type="text" name="name" value={formData.name} onChange={(e) => handleInputChange("name", e.target.value)} />
             </div>
             <div className={styles.formItem}>
               <label htmlFor="content" className={styles.formLabel}>
                 <span className={styles.terminalPrefix}>$ </span>
                 お問い合わせ内容
               </label>
-              <textarea
-                id="content"
-                name="content"
-                value={formData.content}
-                onChange={(e) => handleInputChange("content", e.target.value)}
-              ></textarea>
+              <textarea id="content" name="content" value={formData.content} onChange={(e) => handleInputChange("content", e.target.value)}></textarea>
             </div>
             <TerminalButton label="送信する" type="submit" />
           </form>
@@ -91,29 +73,16 @@ export default function ContactSection() {
               <span className={styles.dotGreen} />
             </div>
             <div className={styles.terminalContent}>
-              <span className={styles.blue}>const</span> message{" "}
-              <span className={styles.red}>=</span>{" "}
-              <span className={styles.yellow}>{"{"}</span>
+              <span className={styles.blue}>const</span> message <span className={styles.red}>=</span> <span className={styles.yellow}>{"{"}</span>
               <br />
               <div className={styles.terminalRow}>
-                inquaryType:{" "}
-                <span className={styles.yellow}>
-                  &apos;{formData.inquiryType}&apos;
-                </span>
-                ,
+                inquiryType: <span className={styles.yellow}>&apos;{formData.inquiryType}&apos;</span>,
               </div>
               <div className={styles.terminalRow}>
-                userName:{" "}
-                <span className={styles.yellow}>
-                  &apos;{formData.name}&apos;
-                </span>
-                ,
+                userName: <span className={styles.yellow}>&apos;{formData.name}&apos;</span>,
               </div>
               <div className={styles.terminalRow}>
-                body:{" "}
-                <span className={styles.yellow}>
-                  &apos;{formData.content}&apos;
-                </span>
+                body: <span className={styles.yellow}>&apos;{formData.content}&apos;</span>
               </div>
               <span className={styles.yellow}>{"}"}</span>
               <br />
@@ -126,24 +95,12 @@ export default function ContactSection() {
               &gt;{" "}
               <AnimatePresence mode="wait">
                 {formResult === "success" && (
-                  <motion.span
-                    key="success"
-                    className={styles.green}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                  >
+                  <motion.span key="success" className={styles.green} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     success!
                   </motion.span>
                 )}
                 {formResult === "error" && (
-                  <motion.span
-                    key="error"
-                    className={styles.red}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                  >
+                  <motion.span key="error" className={styles.red} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     error! Please enter all of the items.
                   </motion.span>
                 )}

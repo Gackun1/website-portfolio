@@ -1,0 +1,185 @@
+@use "../../styles/variables" as *;
+
+.page {
+  padding: $section-padding;
+  background: $color-bg-secondary;
+  min-height: 100vh;
+
+  @media (max-width: $bp-tablet) {
+    padding: 50px $section-padding-mobile;
+  }
+}
+
+.back {
+  display: inline-block;
+  font-family: $font-code;
+  font-size: 14px;
+  color: $color-gray-1;
+  transition: color 0.3s ease;
+
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    color: $color-green;
+  }
+}
+
+.article {
+  margin: 30px 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: $color-sky-blue;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.title {
+  font-size: 28px;
+  line-height: 140%;
+
+  @media (max-width: $bp-tablet) {
+    font-size: 22px;
+  }
+}
+
+.date {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: $color-gray-1;
+}
+
+// Prose typography for markdown content
+.prose {
+  line-height: 1.8;
+  color: $color-gray-3;
+
+  h2 {
+    font-size: 24px;
+    margin: 48px 0 16px;
+    padding-left: 12px;
+    border-left: 3px solid $color-green;
+
+    @media (max-width: $bp-tablet) {
+      font-size: 20px;
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 32px 0 12px;
+
+    @media (max-width: $bp-tablet) {
+      font-size: 18px;
+    }
+  }
+
+  p {
+    margin: 16px 0;
+  }
+
+  a {
+    color: $color-blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul,
+  ol {
+    margin: 16px 0;
+    padding-left: 24px;
+  }
+
+  li {
+    margin: 6px 0;
+  }
+
+  code {
+    font-family: $font-code;
+    font-size: 0.9em;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  pre {
+    margin: 20px 0;
+    padding: 20px;
+    background: $color-black-2;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow-x: auto;
+
+    code {
+      background: none;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+
+  blockquote {
+    margin: 20px 0;
+    padding: 12px 20px;
+    border-left: 3px solid $color-yellow;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 8px 8px 0;
+  }
+
+  table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+  }
+
+  th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+  }
+
+  strong {
+    color: $color-white;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  hr {
+    margin: 32px 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
