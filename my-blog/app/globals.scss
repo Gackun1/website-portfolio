@@ -207,6 +207,15 @@ progress {
   cursor: default;
 }
 
+@font-face {
+  font-family: "noto-regular";
+  src: url(/font/noto-regular.otf);
+}
+@font-face {
+  font-family: "code";
+  src: url(/font/RictyDiminished-Bold.ttf);
+}
+
 h1,
 h2,
 h3,
@@ -233,6 +242,23 @@ textarea {
 
 a {
   color: #66d9ef;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: #66d9ef;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 }
 
 h2 {
@@ -245,4 +271,9 @@ h3 {
 
 h4 {
   font-size: 20px;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
 }

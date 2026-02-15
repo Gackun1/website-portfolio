@@ -1,0 +1,74 @@
+@use "../../../styles/variables" as *;
+
+.cSection {
+  padding: $section-padding;
+  background: $color-bg-secondary;
+  @include section-divider;
+}
+
+.cSkills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.cSkillsItem {
+  flex: 1;
+  min-width: 200px;
+}
+
+.cSkillsHeading {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-family: $font-code;
+  padding-bottom: 8px;
+  border-bottom: 2px solid;
+
+  &.frontend {
+    color: $color-cat-frontend;
+    border-color: $color-cat-frontend;
+  }
+  &.backend {
+    color: $color-cat-backend;
+    border-color: $color-cat-backend;
+  }
+  &.design {
+    color: $color-cat-design;
+    border-color: $color-cat-design;
+  }
+  &.quality {
+    color: $color-cat-quality;
+    border-color: $color-cat-quality;
+  }
+}
+
+.cSkillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cSkillsBadge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: $font-code;
+  color: $color-white;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: default;
+
+  &.frontend {
+    border-color: rgba($color-cat-frontend, 0.4);
+  }
+  &.backend {
+    border-color: rgba($color-cat-backend, 0.4);
+  }
+  &.design {
+    border-color: rgba($color-cat-design, 0.4);
+  }
+  &.quality {
+    border-color: rgba($color-cat-quality, 0.4);
+  }
+}

@@ -1,9 +1,50 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import styles from "./SideMenu.module.scss";
 
+const navItems = [
+  { href: "#about", label: "About" },
+  { href: "#skill", label: "Skill" },
+  { href: "#works", label: "Works" },
+  { href: "#blog", label: "Blog" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function SideMenu() {
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const sectionIds = ["about", "skill", "works", "blog", "contact"];
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(id);
+            }
+          });
+        },
+        { rootMargin: "-30% 0px -60% 0px" }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const targetElement = document.querySelector(href);
     if (targetElement) {
@@ -25,21 +66,27 @@ export default function SideMenu() {
         </a>
       </div>
       <nav className={styles.cSideMenuNav}>
-        <a href="#about" className={styles.cSideMenuNavItem} onClick={(e) => handleSmoothScroll(e, "#about")}>
-          About
-        </a>
-        <a href="#skill" className={styles.cSideMenuNavItem} onClick={(e) => handleSmoothScroll(e, "#skill")}>
-          Skill
-        </a>
-        <a href="#works" className={styles.cSideMenuNavItem} onClick={(e) => handleSmoothScroll(e, "#works")}>
-          Works
-        </a>
-        <a href="#blog" className={styles.cSideMenuNavItem} onClick={(e) => handleSmoothScroll(e, "#blog")}>
-          Blog
-        </a>
-        <a href="#contact" className={styles.cSideMenuNavItem} onClick={(e) => handleSmoothScroll(e, "#contact")}>
-          Contact
-        </a>
+        {navItems.map((item) => {
+          const sectionId = item.href.replace("#", "");
+          const isActive = activeSection === sectionId;
+          return (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`${styles.cSideMenuNavItem} ${isActive ? styles.active : ""}`}
+              onClick={(e) => handleSmoothScroll(e, item.href)}
+            >
+              {isActive && (
+                <motion.span
+                  className={styles.activeIndicator}
+                  layoutId="activeNav"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className={styles.navLabel}>{item.label}</span>
+            </a>
+          );
+        })}
       </nav>
       <div className={styles.cSideMenuSns}>
         <a href="#" className={styles.cSideMenuSnsItem}>

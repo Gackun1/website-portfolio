@@ -1,5 +1,4 @@
-$color-black-2: #181818;
-$color-gray-1: #909096;
+@use "../../styles/variables" as *;
 
 .cFooter {
   padding: 30px;

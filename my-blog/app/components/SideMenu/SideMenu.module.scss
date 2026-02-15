@@ -1,14 +1,4 @@
-$color-white: #eee;
-$color-black: #333;
-$color-black-2: #181818;
-$color-gray-1: #909096;
-$color-gray-2: #90909655;
-$color-gray-3: #dbdbdb;
-$color-green: #a6e22e;
-$color-red: #f92672;
-$color-yellow: #e6db74;
-$color-blue: #66d9ef;
-$color-sky-blue: #f1f5f9;
+@use "../../styles/variables" as *;
 
 .cSideMenu {
   display: flex;
@@ -35,17 +25,39 @@ $color-sky-blue: #f1f5f9;
 }
 
 .cSideMenuNavItem {
+  position: relative;
   padding: 15px;
   text-align: center;
   border-top: solid 1px $color-gray-2;
   color: $color-gray-1;
-  transition: 0.3s ease;
+  transition: color 0.3s ease;
+
   &:last-child {
     border-bottom: solid 1px $color-gray-2;
   }
   &:hover {
     color: $color-blue;
   }
+
+  &.active {
+    color: #fff;
+  }
+}
+
+.navLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.activeIndicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: $color-green;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 8px $color-green, 0 0 16px rgba($color-green, 0.3);
 }
 
 .cSideMenuSns {
@@ -55,12 +67,17 @@ $color-sky-blue: #f1f5f9;
 }
 
 .cSideMenuSnsItem {
-  opacity: 0.65;
-  transition: 0.3s ease;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+
   & + & {
     margin: 0 0 0 10px;
   }
+
   &:hover {
     opacity: 1;
+    filter: grayscale(0%);
+    transform: translateY(-2px);
   }
 }

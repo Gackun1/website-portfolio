@@ -1,0 +1,86 @@
+@use "../../../styles/variables" as *;
+
+.cSection {
+  padding: $section-padding;
+  background: $color-bg-primary;
+}
+
+.cSectionDescription {
+  margin: 0;
+  color: $color-gray-3;
+}
+
+// Works grid
+.cWorks {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cWorksItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    .cWorksImg {
+      transform: scale(1.08);
+    }
+    .cWorksOverlay {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+    }
+    .cWorksHeading {
+      @include glow($color-white, 4px);
+    }
+  }
+}
+
+.cWorksImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cWorksOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  transition: background 0.5s ease;
+  pointer-events: none;
+}
+
+.cWorksCat {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 3px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  @include glassmorphism(0.2, 8px);
+  color: $color-white;
+}
+
+.cWorksHeading {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 20px;
+  transition: text-shadow 0.3s ease;
+}

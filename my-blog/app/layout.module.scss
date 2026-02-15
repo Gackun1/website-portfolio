@@ -1,4 +1,4 @@
-$color-black-2: #181818;
+@use "./styles/variables" as *;
 
 .container {
   position: relative;
@@ -15,11 +15,11 @@ $color-black-2: #181818;
   left: 0;
   height: 100vh;
   width: auto;
-  background: #181818;
+  background: $color-black-2;
 }
 
 .content {
   z-index: 1;
   grid-column: 2 / 3;
-  background: #1d1d1d;
+  background: $color-bg-primary;
 }

@@ -1,0 +1,77 @@
+@use "../../../styles/variables" as *;
+
+.cSection {
+  padding: $section-padding;
+  background: $color-bg-secondary;
+}
+
+.cSectionDescription {
+  margin: 0 0 30px 0;
+  color: $color-gray-3;
+}
+
+// Blog grid
+.cBlog {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+
+  a {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.cBlogItem {
+  display: flex;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: rgba($color-blue, 0.4);
+
+    .cBlogImg {
+      border-color: $color-blue;
+      box-shadow: 0 0 12px rgba($color-blue, 0.3);
+    }
+  }
+}
+
+.cBlogImg {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: $color-sky-blue;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.cBlogText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 0 0 15px;
+}
+
+.cBlogHeading {
+  line-height: 140%;
+  font-size: 16px;
+}
+
+.cBlogDate {
+  font-size: 13px;
+  color: $color-gray-1;
+  margin-top: 4px;
+}

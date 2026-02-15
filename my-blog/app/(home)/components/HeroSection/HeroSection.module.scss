@@ -1,0 +1,74 @@
+@use "../../../styles/variables" as *;
+
+.cTopSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: $section-padding;
+  box-sizing: border-box;
+}
+
+.cTopSectionHeading {
+  z-index: 1;
+  position: absolute;
+  bottom: $section-padding;
+  left: $section-padding;
+  font-size: 3.5vw;
+}
+
+// Typing animations
+.uTyping {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid transparent;
+}
+
+.uTypingSize6 {
+  @extend .uTyping;
+  width: 0;
+  animation: typingSize6 0.6s steps(6, end) forwards, cursorNone 0.6s steps(6, end);
+  animation-delay: 0s;
+}
+
+.uTypingSize12 {
+  @extend .uTyping;
+  width: 0;
+  animation: typingSize12 1s steps(12, end) forwards, cursorNone 1s steps(12, end);
+  animation-delay: 0.6s;
+}
+
+.uTypingSize20 {
+  @extend .uTyping;
+  width: 0;
+  animation: typingSize20 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
+  animation-delay: 1.6s;
+}
+
+@keyframes typingSize6 {
+  from { width: 0; }
+  to { width: 12vw; }
+}
+
+@keyframes typingSize12 {
+  from { width: 0; }
+  to { width: 22vw; }
+}
+
+@keyframes typingSize20 {
+  from { width: 0; }
+  to { width: 48vw; }
+}
+
+@keyframes cursor {
+  50% { border-color: $color-white; }
+}
+
+@keyframes cursorNone {
+  from { border-color: transparent; }
+  to { border-color: $color-white; }
+}
+
+.uColorRed {
+  color: $color-red;
+}
