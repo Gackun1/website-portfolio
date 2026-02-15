@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.cSection {
+.section {
   padding: $section-padding;
   background: $color-bg-secondary;
 
@@ -9,12 +9,12 @@
   }
 }
 
-.cSectionDescription {
+.description {
   color: $color-gray-3;
 }
 
 // Blog grid
-.cBlog {
+.grid {
   margin: 30px auto 0;
   display: grid;
   grid-gap: 20px;
@@ -31,7 +31,7 @@
   }
 }
 
-.cBlogItem {
+.item {
   display: flex;
   padding: 16px;
   background: rgba(255, 255, 255, 0.03);
@@ -42,14 +42,14 @@
   &:hover {
     border-color: rgba($color-blue, 0.4);
 
-    .cBlogImg {
+    .image {
       border-color: $color-blue;
       box-shadow: 0 0 12px rgba($color-blue, 0.3);
     }
   }
 }
 
-.cBlogImg {
+.image {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
@@ -66,19 +66,19 @@
   }
 }
 
-.cBlogText {
+.body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 0 0 15px;
 }
 
-.cBlogHeading {
+.title {
   line-height: 140%;
   font-size: 16px;
 }
 
-.cBlogDate {
+.date {
   font-size: 13px;
   color: $color-gray-1;
   margin-top: 4px;

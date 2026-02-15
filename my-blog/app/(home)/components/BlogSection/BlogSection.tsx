@@ -25,27 +25,27 @@ const blogPosts: BlogPost[] = [
 
 export default function BlogSection() {
   return (
-    <section id="blog" className={styles.cSection}>
+    <section id="blog" className={styles.section}>
       <ScrollReveal>
         <SectionHeading name="blog" args="'desc'" />
-        <div className={styles.cSectionDescription}>
+        <div className={styles.description}>
           私の技術ブログです。
           <br />
           主にWEBのフロントエンド開発についての記事を書いています。
         </div>
       </ScrollReveal>
 
-      <StaggerContainer className={styles.cBlog} staggerDelay={0.1}>
+      <StaggerContainer className={styles.grid} staggerDelay={0.1}>
         {blogPosts.map((post, index) => (
           <StaggerItem key={index}>
             <a href={post.href}>
-              <article className={styles.cBlogItem}>
-                <div className={styles.cBlogImg}>
+              <article className={styles.item}>
+                <div className={styles.image}>
                   <img src={post.image} alt="" />
                 </div>
-                <div className={styles.cBlogText}>
-                  <h3 className={styles.cBlogHeading}>{post.title}</h3>
-                  <span className={styles.cBlogDate}>{post.date}</span>
+                <div className={styles.body}>
+                  <h3 className={styles.title}>{post.title}</h3>
+                  <span className={styles.date}>{post.date}</span>
                 </div>
               </article>
             </a>

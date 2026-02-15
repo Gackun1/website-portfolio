@@ -29,19 +29,19 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className={styles.cSection}>
+    <section id="contact" className={styles.section}>
       <ScrollReveal>
         <SectionHeading name="contact" args="message" />
-        <div className={styles.cSectionDescription}>
+        <div className={styles.description}>
           制作のご依頼、ご相談などはこちらのフォームからお気軽にお問い合わせください。
         </div>
       </ScrollReveal>
 
       <ScrollReveal delay={0.2}>
-        <div className={styles.cContactArea}>
-          <form onSubmit={handleSubmit} className={styles.cContactForm}>
-            <div className={styles.cContactFormItem}>
-              <label htmlFor="inquiry_type" className={styles.cContactFormHeading}>
+        <div className={styles.grid}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.formItem}>
+              <label htmlFor="inquiry_type" className={styles.formLabel}>
                 <span className={styles.terminalPrefix}>$ </span>
                 お問い合わせ目的
               </label>
@@ -57,8 +57,8 @@ export default function ContactSection() {
                 <option value="other">その他</option>
               </select>
             </div>
-            <div className={styles.cContactFormItem}>
-              <label htmlFor="name" className={styles.cContactFormHeading}>
+            <div className={styles.formItem}>
+              <label htmlFor="name" className={styles.formLabel}>
                 <span className={styles.terminalPrefix}>$ </span>
                 お名前
               </label>
@@ -70,8 +70,8 @@ export default function ContactSection() {
                 onChange={(e) => handleInputChange("name", e.target.value)}
               />
             </div>
-            <div className={styles.cContactFormItem}>
-              <label htmlFor="content" className={styles.cContactFormHeading}>
+            <div className={styles.formItem}>
+              <label htmlFor="content" className={styles.formLabel}>
                 <span className={styles.terminalPrefix}>$ </span>
                 お問い合わせ内容
               </label>
@@ -84,43 +84,43 @@ export default function ContactSection() {
             </div>
             <TerminalButton label="送信する" type="submit" />
           </form>
-          <div className={styles.cContactAreaOutput}>
+          <div className={styles.terminal}>
             <div className={styles.terminalDots}>
               <span className={styles.dotRed} />
               <span className={styles.dotYellow} />
               <span className={styles.dotGreen} />
             </div>
             <div className={styles.terminalContent}>
-              <span className={styles.uColorBlue}>const</span> message{" "}
-              <span className={styles.uColorRed}>=</span>{" "}
-              <span className={styles.uColorYellow}>{"{"}</span>
+              <span className={styles.blue}>const</span> message{" "}
+              <span className={styles.red}>=</span>{" "}
+              <span className={styles.yellow}>{"{"}</span>
               <br />
-              <div className={styles.cContactAreaRow}>
+              <div className={styles.terminalRow}>
                 inquaryType:{" "}
-                <span className={styles.uColorYellow}>
+                <span className={styles.yellow}>
                   &apos;{formData.inquiryType}&apos;
                 </span>
                 ,
               </div>
-              <div className={styles.cContactAreaRow}>
+              <div className={styles.terminalRow}>
                 userName:{" "}
-                <span className={styles.uColorYellow}>
+                <span className={styles.yellow}>
                   &apos;{formData.name}&apos;
                 </span>
                 ,
               </div>
-              <div className={styles.cContactAreaRow}>
+              <div className={styles.terminalRow}>
                 body:{" "}
-                <span className={styles.uColorYellow}>
+                <span className={styles.yellow}>
                   &apos;{formData.content}&apos;
                 </span>
               </div>
-              <span className={styles.uColorYellow}>{"}"}</span>
+              <span className={styles.yellow}>{"}"}</span>
               <br />
               <br />
-              gackun<span className={styles.uColorGreen}>.contact</span>
-              <span className={styles.uColorYellow}>(</span>message
-              <span className={styles.uColorYellow}>)</span>
+              gackun<span className={styles.green}>.contact</span>
+              <span className={styles.yellow}>(</span>message
+              <span className={styles.yellow}>)</span>
               <br />
               <br />
               &gt;{" "}
@@ -128,7 +128,7 @@ export default function ContactSection() {
                 {formResult === "success" && (
                   <motion.span
                     key="success"
-                    className={styles.uColorGreen}
+                    className={styles.green}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
@@ -139,7 +139,7 @@ export default function ContactSection() {
                 {formResult === "error" && (
                   <motion.span
                     key="error"
-                    className={styles.uColorRed}
+                    className={styles.red}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}

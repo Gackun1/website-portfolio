@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.svgContainer {
+.container {
   z-index: 0;
   position: absolute;
   right: 0;
@@ -16,17 +16,17 @@
   }
 }
 
-.animatedSvg {
+.svg {
   width: 100%;
   height: 100%;
   overflow: visible;
-  
+
   path {
     fill: transparent;
     stroke: $color-blue;
     stroke-miterlimit: 10;
   }
-  
+
   &.complete path {
     stroke: $color-blue;
     fill: #000;

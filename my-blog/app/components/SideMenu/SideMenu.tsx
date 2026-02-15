@@ -105,13 +105,13 @@ export default function SideMenu() {
       </div>
 
       {/* Desktop sidebar menu */}
-      <header className={styles.cSideMenu}>
-        <div className={styles.cSideMenuImg}>
+      <header className={styles.sidebar}>
+        <div className={styles.logo}>
           <a href="#top" onClick={(e) => handleSmoothScroll(e, "#top")}>
             <img src="/img/logo.png" alt="" />
           </a>
         </div>
-        <nav className={styles.cSideMenuNav}>
+        <nav className={styles.nav}>
           {navItems.map((item) => {
             const sectionId = item.href.replace("#", "");
             const isActive = activeSection === sectionId;
@@ -119,7 +119,7 @@ export default function SideMenu() {
               <a
                 key={item.href}
                 href={item.href}
-                className={`${styles.cSideMenuNavItem} ${isActive ? styles.active : ""}`}
+                className={`${styles.navItem} ${isActive ? styles.active : ""}`}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
               >
                 {isActive && (
@@ -134,14 +134,14 @@ export default function SideMenu() {
             );
           })}
         </nav>
-        <div className={styles.cSideMenuSns}>
-          <a href="#" className={styles.cSideMenuSnsItem}>
+        <div className={styles.sns}>
+          <a href="#" className={styles.snsItem}>
             <img src="/img/i_instagram.png" alt="" />
           </a>
-          <a href="#" className={styles.cSideMenuSnsItem}>
+          <a href="#" className={styles.snsItem}>
             <img src="/img/i_twitter.png" alt="" />
           </a>
-          <a href="#" className={styles.cSideMenuSnsItem}>
+          <a href="#" className={styles.snsItem}>
             <img src="/img/i_youtube.png" alt="" />
           </a>
         </div>

@@ -29,10 +29,10 @@ export default function WorksSection() {
 
   return (
     <>
-      <section id="works" className={styles.cSection}>
+      <section id="works" className={styles.section}>
         <ScrollReveal>
           <SectionHeading name="works" args="'select'" />
-          <div className={styles.cSectionDescription}>
+          <div className={styles.description}>
             私の制作実績です。
             <br />
             全て見るには<a href="#">一覧ページ</a>にアクセスしてください！
@@ -40,17 +40,17 @@ export default function WorksSection() {
         </ScrollReveal>
       </section>
 
-      <StaggerContainer className={styles.cWorks}>
+      <StaggerContainer className={styles.grid}>
         {works.map((work, index) => (
           <StaggerItem key={index}>
             <article
-              className={styles.cWorksItem}
+              className={styles.item}
               onClick={() => setOpenPopup(index)}
             >
-              <img src={work.image} alt={work.title} className={styles.cWorksImg} />
-              <div className={styles.cWorksOverlay} />
-              <span className={styles.cWorksCat}>{work.category}</span>
-              <h3 className={styles.cWorksHeading}>{work.title}</h3>
+              <img src={work.image} alt={work.title} className={styles.image} />
+              <div className={styles.overlay} />
+              <span className={styles.category}>{work.category}</span>
+              <h3 className={styles.title}>{work.title}</h3>
             </article>
           </StaggerItem>
         ))}
@@ -69,7 +69,7 @@ export default function WorksSection() {
         )}
       </AnimatedPopup>
 
-      <ScrollReveal className={styles.cWorksButton}>
+      <ScrollReveal className={styles.moreButton}>
         <TerminalButton label="もっと見る" />
       </ScrollReveal>
     </>

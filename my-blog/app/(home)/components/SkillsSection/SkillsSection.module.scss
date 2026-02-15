@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.cSection {
+.section {
   padding: $section-padding;
   background: $color-bg-secondary;
   @include section-divider;
@@ -10,7 +10,7 @@
   }
 }
 
-.cSkills {
+.grid {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
@@ -20,7 +20,7 @@
   }
 }
 
-.cSkillsItem {
+.item {
   flex: 1;
   min-width: 200px;
 
@@ -29,7 +29,7 @@
   }
 }
 
-.cSkillsHeading {
+.categoryTitle {
   margin: 0 0 12px 0;
   font-size: 18px;
   font-family: $font-code;
@@ -54,13 +54,13 @@
   }
 }
 
-.cSkillsList {
+.list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.cSkillsBadge {
+.badge {
   display: inline-block;
   padding: 5px 14px;
   border-radius: 4px;

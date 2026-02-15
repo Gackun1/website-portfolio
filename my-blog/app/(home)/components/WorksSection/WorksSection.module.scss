@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.cSection {
+.section {
   padding: $section-padding;
   background: $color-bg-primary;
 
@@ -9,12 +9,12 @@
   }
 }
 
-.cSectionDescription {
+.description {
   color: $color-gray-3;
 }
 
 // Works grid
-.cWorks {
+.grid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -28,7 +28,7 @@
   }
 }
 
-.cWorksItem {
+.item {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -36,19 +36,19 @@
   cursor: pointer;
 
   &:hover {
-    .cWorksImg {
+    .image {
       transform: scale(1.08);
     }
-    .cWorksOverlay {
+    .overlay {
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
     }
-    .cWorksHeading {
+    .title {
       @include glow($color-white, 4px);
     }
   }
 }
 
-.cWorksImg {
+.image {
   position: absolute;
   left: 0;
   top: 0;
@@ -58,7 +58,7 @@
   transition: transform 0.5s ease;
 }
 
-.cWorksOverlay {
+.overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -69,7 +69,7 @@
   pointer-events: none;
 }
 
-.cWorksCat {
+.category {
   position: absolute;
   right: 10px;
   top: 10px;
@@ -80,7 +80,7 @@
   color: $color-white;
 }
 
-.cWorksHeading {
+.title {
   position: absolute;
   bottom: 15px;
   left: 15px;
@@ -88,7 +88,7 @@
   transition: text-shadow 0.3s ease;
 }
 
-.cWorksButton {
+.moreButton {
   padding-bottom: 100px;
 
   @media (max-width: $bp-tablet) {

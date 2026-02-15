@@ -6,10 +6,10 @@ import styles from "./AboutSection.module.scss";
 
 export default function AboutSection() {
   return (
-    <section id="about" className={styles.cSection}>
+    <section id="about" className={styles.section}>
       <ScrollReveal>
         <SectionHeading name="about" />
-        <div className={styles.cSectionDescription}>
+        <div className={styles.description}>
           私はウェブのフロントエンド開発者・デザイナーです。
           <br />
           HALを卒業後東京を拠点にフリーランス活動をしています。

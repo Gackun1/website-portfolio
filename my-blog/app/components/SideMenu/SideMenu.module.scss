@@ -102,7 +102,7 @@
 // ==========================================
 // Desktop sidebar
 // ==========================================
-.cSideMenu {
+.sidebar {
   position: fixed;
   left: 0;
   top: 0;
@@ -119,7 +119,7 @@
   }
 }
 
-.cSideMenuImg {
+.logo {
   width: 80%;
   padding: 20px 0 0 0;
   margin: 0 auto 0 auto;
@@ -135,13 +135,13 @@
   }
 }
 
-.cSideMenuNav {
+.nav {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.cSideMenuNavItem {
+.navItem {
   position: relative;
   padding: 15px;
   text-align: center;
@@ -177,13 +177,13 @@
   box-shadow: 0 0 8px $color-green, 0 0 16px rgba($color-green, 0.3);
 }
 
-.cSideMenuSns {
+.sns {
   display: flex;
   justify-content: center;
   height: 200px;
 }
 
-.cSideMenuSnsItem {
+.snsItem {
   opacity: 0.5;
   filter: grayscale(100%);
   transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;

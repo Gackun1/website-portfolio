@@ -37,20 +37,20 @@ const skillCategories: SkillCategory[] = [
 
 export default function SkillsSection() {
   return (
-    <section id="skill" className={styles.cSection}>
+    <section id="skill" className={styles.section}>
       <ScrollReveal>
         <SectionHeading name="skills" />
       </ScrollReveal>
-      <div className={styles.cSkills}>
+      <div className={styles.grid}>
         {skillCategories.map((category) => (
-          <div key={category.name} className={styles.cSkillsItem}>
+          <div key={category.name} className={styles.item}>
             <ScrollReveal>
-              <h4 className={`${styles.cSkillsHeading} ${styles[category.colorClass]}`}>{category.name}</h4>
+              <h4 className={`${styles.categoryTitle} ${styles[category.colorClass]}`}>{category.name}</h4>
             </ScrollReveal>
-            <StaggerContainer className={styles.cSkillsList}>
+            <StaggerContainer className={styles.list}>
               {category.skills.map((skill) => (
                 <StaggerItem key={skill}>
-                  <span className={`${styles.cSkillsBadge} ${styles[category.colorClass]}`}>{skill}</span>
+                  <span className={`${styles.badge} ${styles[category.colorClass]}`}>{skill}</span>
                 </StaggerItem>
               ))}
             </StaggerContainer>

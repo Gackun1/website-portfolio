@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.cSection {
+.section {
   padding: $section-padding;
   background: $color-bg-primary;
 
@@ -9,29 +9,29 @@
   }
 }
 
-.cSectionDescription {
+.description {
   margin: 0 0 30px 0;
   color: $color-gray-3;
 }
 
-.uColorGreen {
+.green {
   color: $color-green;
 }
 
-.uColorYellow {
+.yellow {
   color: $color-yellow;
 }
 
-.uColorBlue {
+.blue {
   color: $color-blue;
 }
 
-.uColorRed {
+.red {
   color: $color-red;
 }
 
 // Contact form
-.cContactArea {
+.grid {
   display: grid;
   grid-template-columns: 50% calc(50% - 30px);
   grid-gap: 30px;
@@ -42,7 +42,7 @@
   }
 }
 
-.cContactForm {
+.form {
   width: 100%;
 
   input[type="text"],
@@ -78,13 +78,13 @@
   }
 }
 
-.cContactFormItem {
+.formItem {
   display: flex;
   flex-direction: column;
   margin: 0 0 24px 0;
 }
 
-.cContactFormHeading {
+.formLabel {
   font-size: 16px;
   color: $color-white;
   margin-bottom: 8px;
@@ -96,7 +96,7 @@
 }
 
 // Terminal output panel
-.cContactAreaOutput {
+.terminal {
   overflow-y: auto;
   border-radius: 8px;
   background: #1e1e2e;
@@ -138,7 +138,7 @@
   padding: 16px 20px;
 }
 
-.cContactAreaRow {
+.terminalRow {
   padding: 0 0 0 1rem;
   word-break: break-all;
 }

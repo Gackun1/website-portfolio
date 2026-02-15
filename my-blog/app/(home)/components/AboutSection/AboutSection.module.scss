@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-.cSection {
+.section {
   padding: $section-padding;
   background: $color-bg-primary;
 
@@ -9,7 +9,7 @@
   }
 }
 
-.cSectionDescription {
+.description {
   color: $color-gray-3;
   line-height: 200%;
 }

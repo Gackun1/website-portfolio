@@ -64,10 +64,10 @@ export default function AnimatedSVG() {
   }, []);
 
   return (
-    <div className={styles.svgContainer}>
+    <div className={styles.container}>
       <svg
         ref={svgRef}
-        className={`${styles.animatedSvg} ${isAnimationComplete ? styles.complete : ""}`}
+        className={`${styles.svg} ${isAnimationComplete ? styles.complete : ""}`}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 499 499"
