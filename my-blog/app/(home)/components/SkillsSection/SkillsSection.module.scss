@@ -1,13 +1,27 @@
 @use "../../../styles/variables" as *;
 
 .section {
+  position: relative;
+  overflow: hidden;
   padding: $section-padding;
   background: $color-bg-secondary;
   @include section-divider;
 
   @media (max-width: $bp-tablet) {
+    display: flex;
+    flex-direction: column;
     padding: 50px $section-padding-mobile;
+
+    // section-divider の ::after をグラフィック下に維持
+    &::after {
+      order: 2;
+    }
   }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }
 
 .grid {

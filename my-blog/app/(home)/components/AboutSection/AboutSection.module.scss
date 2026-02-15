@@ -1,6 +1,8 @@
 @use "../../../styles/variables" as *;
 
 .section {
+  position: relative;
+  overflow: hidden;
   padding: $section-padding;
   background: $color-bg-primary;
 
@@ -9,7 +11,17 @@
   }
 }
 
+.content {
+  position: relative;
+  z-index: 1;
+}
+
 .description {
+  max-width: 55%;
   color: $color-gray-3;
   line-height: 200%;
+
+  @media (max-width: $bp-tablet) {
+    max-width: 100%;
+  }
 }

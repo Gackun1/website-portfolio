@@ -58,6 +58,16 @@
   width: 0;
   animation: typingSize20 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
   animation-delay: 1.6s;
+
+  @media (max-width: $bp-tablet) {
+    animation: inquirySize20Md 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
+    animation-delay: 1.6s;
+  }
+
+  @media (max-width: $bp-mobile) {
+    animation: inquirySize20Sm 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
+    animation-delay: 1.6s;
+  }
 }
 
 @keyframes typingSize6 {
@@ -84,6 +94,24 @@
   }
   to {
     width: 13.5em;
+  }
+}
+
+@keyframes inquirySize20Md {
+  from {
+    width: 0;
+  }
+  to {
+    width: 14em;
+  }
+}
+
+@keyframes inquirySize20Sm {
+  from {
+    width: 0;
+  }
+  to {
+    width: 15em;
   }
 }
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import GeometricShapes from "../../../components/GeometricShapes/GeometricShapes";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
 import StaggerContainer from "../../../components/motion/StaggerContainer";
 import StaggerItem from "../../../components/motion/StaggerItem";
@@ -36,26 +38,41 @@ const skillCategories: SkillCategory[] = [
 ];
 
 export default function SkillsSection() {
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
   return (
     <section id="skill" className={styles.section}>
-      <ScrollReveal>
-        <SectionHeading name="skills" />
-      </ScrollReveal>
-      <div className={styles.grid}>
-        {skillCategories.map((category) => (
-          <div key={category.name} className={styles.item}>
-            <ScrollReveal>
-              <h4 className={`${styles.categoryTitle} ${styles[category.colorClass]}`}>{category.name}</h4>
-            </ScrollReveal>
-            <StaggerContainer className={styles.list}>
-              {category.skills.map((skill) => (
-                <StaggerItem key={skill}>
-                  <span className={`${styles.badge} ${styles[category.colorClass]}`}>{skill}</span>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
-          </div>
-        ))}
+      <GeometricShapes
+        variant="skills"
+        skillData={skillCategories}
+        hoveredSkill={hoveredSkill}
+      />
+      <div className={styles.content}>
+        <ScrollReveal>
+          <SectionHeading name="skills" />
+        </ScrollReveal>
+        <div className={styles.grid}>
+          {skillCategories.map((category) => (
+            <div key={category.name} className={styles.item}>
+              <ScrollReveal>
+                <h4 className={`${styles.categoryTitle} ${styles[category.colorClass]}`}>{category.name}</h4>
+              </ScrollReveal>
+              <StaggerContainer className={styles.list}>
+                {category.skills.map((skill) => (
+                  <StaggerItem key={skill}>
+                    <span
+                      className={`${styles.badge} ${styles[category.colorClass]}`}
+                      onMouseEnter={() => setHoveredSkill(skill)}
+                      onMouseLeave={() => setHoveredSkill(null)}
+                    >
+                      {skill}
+                    </span>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

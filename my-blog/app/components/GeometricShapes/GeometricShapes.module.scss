@@ -1,0 +1,133 @@
+@use "../../styles/variables" as *;
+
+// =============================================
+// GeometricShapes — レイアウト & アニメーション
+//
+// ■ 共通方針
+//   pointer-events: none でテキスト選択・リンク操作を妨げない。
+//   モバイル(480px以下)では非表示 — 小画面ではコンテンツ優先。
+//
+// ■ About variant
+//   セクション右側に大きく配置（幅48%, 最大500px）。
+//   テキスト領域(左55%)と明確に棲み分けることで、
+//   グラフィックに"自分の居場所"を与えるレイアウト。
+//   opacity 0.45 — 背景ではなく"見せる"装飾。
+//   タブレットではテキストと重なるため opacity 0.1 に。
+//
+// ■ Skills variant
+//   セクション全面に敷く背景オーバーレイ（inset: 0）。
+//   上に並ぶスキルバッジがネットワーク上の"ラベル"に見える構成。
+//   opacity 0.18 — コンテンツを邪魔せず、存在感は保つ。
+//
+// ■ float アニメーション
+//   About のみ。描画完了(≒3s)後に開始し、
+//   アイソメ構造体が空間に浮遊している感覚を付加。
+//   prefers-reduced-motion 時は停止。
+// =============================================
+
+.container {
+  position: absolute;
+  pointer-events: none;
+
+  @media (max-width: $bp-mobile) {
+    display: none;
+  }
+}
+
+// About: テキストの右側に大きく確保した専用領域
+.about {
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  opacity: 0.45;
+
+  @media (max-width: $bp-tablet) {
+    width: 55%;
+    opacity: 0.1;
+  }
+}
+
+// Skills: デスクトップではセクション全面の背景、タブレットではコンテンツ下の専用領域
+.skills {
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.18;
+
+  @media (max-width: $bp-tablet) {
+    position: relative;
+    inset: auto;
+    order: 1;
+    width: 100%;
+    height: 200px;
+    margin-top: 30px;
+    opacity: 0.45;
+  }
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+// 描画完了後の浮遊感 — 3s delay で pathLength アニメ終了を待つ
+.floatWrapper {
+  width: 100%;
+  height: 100%;
+  animation: float 7s ease-in-out 3s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// パルスリング — ホバー時の発光波紋（3D回転中も位置はTSXで毎フレーム更新）
+.pulseRing1 {
+  animation: pulse1 1.4s ease-in-out infinite;
+}
+
+.pulseRing2 {
+  animation: pulse2 2s ease-in-out 0.2s infinite;
+}
+
+@keyframes pulse1 {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse2 {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatWrapper {
+    animation: none;
+  }
+
+  .pulseRing1,
+  .pulseRing2 {
+    animation: none;
+  }
+}
