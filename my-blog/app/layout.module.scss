@@ -1,0 +1,25 @@
+$color-black-2: #181818;
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  min-width: 1000px;
+}
+
+.sidebar {
+  z-index: 2;
+  grid-column: 1 / 2;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: auto;
+  background: #181818;
+}
+
+.content {
+  z-index: 1;
+  grid-column: 2 / 3;
+  background: #1d1d1d;
+}

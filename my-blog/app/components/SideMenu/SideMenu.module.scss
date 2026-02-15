@@ -1,0 +1,66 @@
+$color-white: #eee;
+$color-black: #333;
+$color-black-2: #181818;
+$color-gray-1: #909096;
+$color-gray-2: #90909655;
+$color-gray-3: #dbdbdb;
+$color-green: #a6e22e;
+$color-red: #f92672;
+$color-yellow: #e6db74;
+$color-blue: #66d9ef;
+$color-sky-blue: #f1f5f9;
+
+.cSideMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.cSideMenuImg {
+  width: 80%;
+  padding: 20px 0 0 0;
+  margin: 0 auto 0 auto;
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.cSideMenuNav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cSideMenuNavItem {
+  padding: 15px;
+  text-align: center;
+  border-top: solid 1px $color-gray-2;
+  color: $color-gray-1;
+  transition: 0.3s ease;
+  &:last-child {
+    border-bottom: solid 1px $color-gray-2;
+  }
+  &:hover {
+    color: $color-blue;
+  }
+}
+
+.cSideMenuSns {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+}
+
+.cSideMenuSnsItem {
+  opacity: 0.65;
+  transition: 0.3s ease;
+  & + & {
+    margin: 0 0 0 10px;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -1,10 +1,9 @@
-import styles from "./Footer.module.css";
+import styles from "./Footer.module.scss";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <small className={styles.footerCopyright}>©2019-2024 Gackun.</small>
+    <footer className={styles.cFooter}>
+      <small className={styles.cFooterCopy}>©2022 Gackun.</small>
     </footer>
   );
-  Footer;
 }
