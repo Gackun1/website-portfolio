@@ -14,17 +14,39 @@ export default function ContactSection() {
     content: "",
   });
   const [formResult, setFormResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.inquiryType && formData.name && formData.content) {
-      setFormResult("success");
-    } else {
+    if (!formData.inquiryType || !formData.name || !formData.content) {
       setFormResult("error");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFormResult("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setFormResult("success");
+        setFormData({ inquiryType: "", name: "", content: "" });
+      } else {
+        setFormResult("error-send");
+      }
+    } catch {
+      setFormResult("error-send");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -64,7 +86,7 @@ export default function ContactSection() {
               </label>
               <textarea id="content" name="content" value={formData.content} onChange={(e) => handleInputChange("content", e.target.value)}></textarea>
             </div>
-            <TerminalButton label="送信する" type="submit" />
+            <TerminalButton label={isSubmitting ? "送信中..." : "送信する"} type="submit" disabled={isSubmitting} />
           </form>
           <div className={styles.terminal}>
             <div className={styles.terminalDots}>
@@ -94,6 +116,11 @@ export default function ContactSection() {
               <br />
               &gt;{" "}
               <AnimatePresence mode="wait">
+                {isSubmitting && (
+                  <motion.span key="sending" className={styles.yellow} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    sending...
+                  </motion.span>
+                )}
                 {formResult === "success" && (
                   <motion.span key="success" className={styles.green} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     success!
@@ -102,6 +129,11 @@ export default function ContactSection() {
                 {formResult === "error" && (
                   <motion.span key="error" className={styles.red} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     error! Please enter all of the items.
+                  </motion.span>
+                )}
+                {formResult === "error-send" && (
+                  <motion.span key="error-send" className={styles.red} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    error! Failed to send message.
                   </motion.span>
                 )}
               </AnimatePresence>
