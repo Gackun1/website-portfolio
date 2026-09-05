@@ -207,13 +207,22 @@ progress {
   cursor: default;
 }
 
-@font-face {
-  font-family: "noto-regular";
-  src: url(/font/noto-regular.otf);
+// ==========================================
+// Fonts
+// フォント本体は app/lib/fonts.ts (next/font) で CSS 変数として登録し、ここで役割に割り当てる。
+// ==========================================
+:root {
+  --font-body: var(--ff-zen-kaku), sans-serif;
+  --font-display: var(--ff-space-grotesk), var(--ff-zen-kaku), sans-serif;
+  --font-code: var(--ff-plex-mono), var(--ff-zen-kaku), monospace;
+  --display-tracking: -0.02em;
 }
-@font-face {
-  font-family: "code";
-  src: url(/font/RictyDiminished-Bold.ttf);
+
+body {
+  color: #eee;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -228,7 +237,7 @@ small,
 input,
 textarea {
   color: #fff;
-  font-family: "noto-regular", sans-serif;
+  font-family: var(--font-body);
 }
 
 * {
@@ -288,4 +297,46 @@ h4 {
 // Smooth scrolling
 html {
   scroll-behavior: smooth;
+}
+
+// Film grain — 平坦なダーク面に質感を与える (pointer-events を奪わない)
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  animation: grain 1s steps(6) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+::selection {
+  color: #1d1d1d;
+  background: #a6e22e;
+}
+
+:focus-visible {
+  outline: 2px solid #a6e22e;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body::after {
+    animation: none;
+  }
 }

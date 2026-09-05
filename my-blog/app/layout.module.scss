@@ -28,6 +28,8 @@
 .content {
   z-index: 1;
   grid-column: 2 / 3;
+  // マーキー等の max-content 要素で 1fr 列が押し広げられないように
+  min-width: 0;
   background: $color-bg-primary;
 
   @media (max-width: $bp-tablet) {

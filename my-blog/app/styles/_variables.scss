@@ -24,8 +24,9 @@ $color-cat-design: $color-blue;
 $color-cat-quality: $color-red;
 
 // Fonts
-$font-body: "noto-regular", sans-serif;
-$font-code: "code", monospace;
+$font-body: var(--font-body);
+$font-display: var(--font-display);
+$font-code: var(--font-code);
 
 // Breakpoints
 $bp-tablet: 768px;
