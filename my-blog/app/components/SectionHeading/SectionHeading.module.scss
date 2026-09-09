@@ -1,26 +1,53 @@
 @use "../../styles/variables" as *;
 
-.heading {
-  position: relative;
-  font-size: 50px;
-  font-family: $font-code;
-  padding-left: 16px;
-  margin: 0 0 30px 0;
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(180deg, $color-green, transparent);
-    border-radius: 3px;
-  }
+.wrap {
+  margin: 0 0 40px 0;
 
   @media (max-width: $bp-tablet) {
-    font-size: 32px;
+    margin-bottom: 28px;
   }
+}
+
+// 01 ───── About me
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-family: $font-code;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $color-gray-1;
+}
+
+.index {
+  color: $color-green;
+}
+
+.rule {
+  display: block;
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, $color-green, rgba($color-gray-1, 0.4));
+  transform-origin: left center;
+}
+
+.heading {
+  overflow: hidden;
+  font-size: clamp(32px, 4.2vw, 64px);
+  font-family: $font-code;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.inner {
+  display: inline-block;
+}
+
+.prompt {
+  margin-right: 0.45em;
+  color: $color-gray-1;
 }
 
 .green {
@@ -29,4 +56,12 @@
 
 .yellow {
   color: $color-yellow;
+}
+
+.string {
+  color: $color-yellow;
+}
+
+.ident {
+  color: $color-white;
 }

@@ -116,6 +116,7 @@ export default function SideMenu() {
                 className={`${styles.overlayNavItem} ${isActive ? styles.active : ""}`}
                 onClick={(e) => handleSmoothScroll(e, item.id)}
               >
+                <span className={styles.overlayIndex}>{String(navItems.indexOf(item) + 1).padStart(2, "0")}</span>
                 {item.label}
               </Link>
             );
@@ -127,7 +128,7 @@ export default function SideMenu() {
       <header className={styles.sidebar}>
         <div className={styles.logo}>
           <Link href="/" onClick={handleLogoClick}>
-            <img src="/img/logo.png" alt="" />
+            <img src="/img/logo.png" alt="Gackun. トップへ" />
           </Link>
         </div>
         <nav className={styles.nav}>
@@ -147,19 +148,20 @@ export default function SideMenu() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
+                <span className={styles.navIndex}>{String(navItems.indexOf(item) + 1).padStart(2, "0")}</span>
                 <span className={styles.navLabel}>{item.label}</span>
               </Link>
             );
           })}
         </nav>
         <div className={styles.sns}>
-          <a href="#" className={styles.snsItem}>
+          <a href="#" className={styles.snsItem} aria-label="Instagram">
             <img src="/img/i_instagram.png" alt="" />
           </a>
-          <a href="#" className={styles.snsItem}>
+          <a href="#" className={styles.snsItem} aria-label="X (Twitter)">
             <img src="/img/i_twitter.png" alt="" />
           </a>
-          <a href="#" className={styles.snsItem}>
+          <a href="#" className={styles.snsItem} aria-label="YouTube">
             <img src="/img/i_youtube.png" alt="" />
           </a>
         </div>
