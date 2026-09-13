@@ -1,0 +1,112 @@
+@use "../../styles/variables" as *;
+
+// ==========================================
+// 共通: 親要素 (position: relative/absolute) いっぱいに広がるレイヤー
+// ==========================================
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dust,
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// ==========================================
+// PathLogo (旧) — 当時の配置をそのまま再現
+// ==========================================
+.pathContainer {
+  z-index: 0;
+  position: absolute;
+  right: 0;
+  top: 5vh;
+  width: 100vh;
+  height: 100vh;
+
+  @media (max-width: $bp-tablet) {
+    width: 80vw;
+    height: 80vw;
+    top: 10vh;
+    opacity: 0.5;
+  }
+}
+
+.pathSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+
+  path {
+    fill: transparent;
+    stroke: $color-blue;
+    stroke-miterlimit: 10;
+  }
+
+  &.complete path {
+    stroke: $color-blue;
+    fill: #000;
+    filter: drop-shadow(0px 0px 5px $color-blue);
+    animation: pulseStroke 60s linear infinite;
+  }
+}
+
+@keyframes pulseStroke {
+  0% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0px 0px 5px $color-blue);
+  }
+  50% {
+    stroke-dashoffset: 300%;
+    filter: drop-shadow(0px 0px 15px $color-blue);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0px 0px 5px $color-blue);
+  }
+}
+
+// ==========================================
+// PathLogoPlus — パーティクル版と同じ位置・サイズ
+// ==========================================
+.plusContainer {
+  position: absolute;
+  right: 4vw;
+  top: 50%;
+  width: min(82vh, 48vw);
+  aspect-ratio: 1;
+  margin-top: calc(min(82vh, 48vw) / -2);
+  perspective: 1200px;
+
+  @media (max-width: $bp-tablet) {
+    right: auto;
+    left: 50%;
+    top: 12vh;
+    width: 74vw;
+    margin: 0 0 0 -37vw;
+  }
+}
+
+.plusTilt {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.plusSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}

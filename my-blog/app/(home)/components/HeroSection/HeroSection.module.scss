@@ -1,135 +1,223 @@
 @use "../../../styles/variables" as *;
 
+$ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
 .section {
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100svh;
+  min-height: 560px;
   padding: $section-padding;
   box-sizing: border-box;
+  overflow: hidden;
+  // 中心からわずかに青みを帯びた闇 — 粒子の発光が沈まないように
+  background:
+    radial-gradient(circle at 74% 46%, rgba($color-blue, 0.07) 0%, transparent 32%),
+    radial-gradient(ellipse 80% 70% at 70% 45%, #20262b 0%, $color-bg-primary 70%);
 
   @media (max-width: $bp-tablet) {
     padding: $section-padding-mobile;
-    height: 110vw;
-  }
-
-  @media (max-width: $bp-mobile) {
-    height: 120vw;
+    background:
+      radial-gradient(circle at 50% 30%, rgba($color-blue, 0.08) 0%, transparent 45%),
+      $color-bg-primary;
   }
 }
 
+// 下端を次のセクションへ溶かし込む
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 70%, $color-bg-primary 100%);
+}
+
+// ==========================================
+// Heading
+// ==========================================
 .heading {
   z-index: 1;
   position: absolute;
   bottom: $section-padding;
   left: $section-padding;
-  font-size: 3.5vw;
+  font-family: $font-display;
+  font-size: 5.5vw;
+  font-weight: 600;
+  line-height: 1.15;
+  text-shadow: 0 0 40px rgba($color-bg-primary, 0.9);
+  pointer-events: none;
+
+  &,
+  * {
+    letter-spacing: var(--display-tracking);
+  }
 
   @media (max-width: $bp-tablet) {
-    bottom: $section-padding-mobile;
+    bottom: 110px;
     left: $section-padding-mobile;
-    font-size: 6vw;
+    font-size: 11vw;
   }
 }
 
-// Typing animations
-.typing {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid transparent;
-}
-
-.typingLine1 {
-  @extend .typing;
-  width: 0;
-  animation: typingSize6 0.6s steps(6, end) forwards, cursorNone 0.6s steps(6, end);
-  animation-delay: 0s;
-}
-
-.typingLine2 {
-  @extend .typing;
-  width: 0;
-  animation: typingSize12 1s steps(12, end) forwards, cursorNone 1s steps(12, end);
-  animation-delay: 0.6s;
-}
-
-.typingLine3 {
-  @extend .typing;
-  width: 0;
-  animation: typingSize20 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
-  animation-delay: 1.6s;
+// ==========================================
+// HUD
+// ==========================================
+.hudTop {
+  z-index: 1;
+  position: absolute;
+  top: 40px;
+  left: $section-padding;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
 
   @media (max-width: $bp-tablet) {
-    animation: inquirySize20Md 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
-    animation-delay: 1.6s;
-  }
-
-  @media (max-width: $bp-mobile) {
-    animation: inquirySize20Sm 2.4s steps(24, end) forwards, cursor 1s steps(24, end) infinite forwards;
-    animation-delay: 1.6s;
-  }
-}
-
-@keyframes typingSize6 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 3.45em;
+    top: auto;
+    bottom: 40px;
+    left: $section-padding-mobile;
+    right: $section-padding-mobile;
+    flex-direction: column;
+    gap: 2px;
   }
 }
 
-@keyframes typingSize12 {
-  from {
-    width: 0;
+.hudLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: $font-code;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-gray-1;
+}
+
+.hudDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-green;
+  box-shadow: 0 0 8px $color-green;
+  animation: blink 2.4s ease-in-out infinite;
+}
+
+.clock {
+  color: $color-white;
+  font-variant-numeric: tabular-nums;
+}
+
+.scroll {
+  z-index: 1;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  &::after {
+    display: none;
   }
-  to {
-    width: 6.3em;
+
+  @media (max-width: $bp-tablet) {
+    right: $section-padding-mobile;
+
+    .scrollLabel {
+      display: none;
+    }
   }
 }
 
-@keyframes typingSize20 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 13.5em;
+.scrollLabel {
+  writing-mode: vertical-rl;
+  font-family: $font-code;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: $color-gray-1;
+}
+
+.scrollLine {
+  position: relative;
+  width: 1px;
+  height: 64px;
+  overflow: hidden;
+  background: rgba($color-white, 0.12);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, $color-green);
+    animation: scrollLine 2.2s $ease-out-expo infinite;
   }
 }
 
-@keyframes inquirySize20Md {
-  from {
-    width: 0;
+@keyframes scrollLine {
+  0% {
+    transform: translateY(-100%);
   }
-  to {
-    width: 14em;
-  }
-}
-
-@keyframes inquirySize20Sm {
-  from {
-    width: 0;
-  }
-  to {
-    width: 15em;
+  60%,
+  100% {
+    transform: translateY(100%);
   }
 }
 
-@keyframes cursor {
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
   50% {
-    border-color: $color-white;
+    opacity: 0.3;
   }
 }
 
-@keyframes cursorNone {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: $color-white;
+// ==========================================
+// Typewriter
+// ==========================================
+.line {
+  display: block;
+  white-space: nowrap;
+}
+
+.ghost {
+  visibility: hidden;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.92em;
+  margin: 0 -0.06em 0 0.06em;
+  vertical-align: -0.1em;
+  background: $color-green;
+  box-shadow: 0 0 12px rgba($color-green, 0.7);
+}
+
+.caretBlink {
+  animation: caretBlink 1.05s steps(1, end) infinite;
+}
+
+@keyframes caretBlink {
+  50% {
+    opacity: 0;
   }
 }
 
 .red {
   color: $color-red;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hudDot,
+  .caretBlink,
+  .scrollLine::before {
+    animation: none;
+  }
 }
