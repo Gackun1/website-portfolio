@@ -3,43 +3,45 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: $section-padding;
+  padding: 140px $section-padding 120px;
   background: $color-bg-secondary;
   @include section-divider;
 
   @media (max-width: $bp-tablet) {
-    display: flex;
-    flex-direction: column;
-    padding: 50px $section-padding-mobile;
-
-    // section-divider の ::after をグラフィック下に維持
-    &::after {
-      order: 2;
-    }
+    padding: 80px $section-padding-mobile 60px;
   }
 }
 
-.content {
+// スキルリスト (左) とネットワーク図 (右) を横並びに
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    gap: 32px;
+  }
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.categories {
+  display: grid;
+  gap: 36px;
+}
+
+.visual {
   position: relative;
-  z-index: 1;
-}
+  width: 100%;
+  max-width: 580px;
+  justify-self: center;
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-
-  @media (max-width: $bp-mobile) {
-    gap: 24px;
-  }
-}
-
-.item {
-  flex: 1;
-  min-width: 200px;
-
-  @media (max-width: $bp-mobile) {
-    min-width: 100%;
+  @media (max-width: $bp-tablet) {
+    max-width: 420px;
   }
 }
 
@@ -81,20 +83,29 @@
   font-size: 14px;
   font-family: $font-code;
   color: $color-white;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: default;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.25s ease;
 
-  &.frontend {
-    border-color: rgba($color-cat-frontend, 0.4);
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
   }
-  &.backend {
-    border-color: rgba($color-cat-backend, 0.4);
-  }
-  &.design {
-    border-color: rgba($color-cat-design, 0.4);
-  }
-  &.quality {
-    border-color: rgba($color-cat-quality, 0.4);
+
+  @each $name, $color in (frontend: $color-cat-frontend, backend: $color-cat-backend, design: $color-cat-design, quality: $color-cat-quality) {
+    &.#{$name} {
+      border-color: rgba($color, 0.35);
+
+      &:hover,
+      &:focus-visible {
+        color: $color-black-2;
+        background: $color;
+        border-color: $color;
+        box-shadow: 0 0 18px rgba($color, 0.45);
+      }
+    }
   }
 }

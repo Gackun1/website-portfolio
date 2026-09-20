@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import GeometricShapes from "../../../components/GeometricShapes/GeometricShapes";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
 import StaggerContainer from "../../../components/motion/StaggerContainer";
 import StaggerItem from "../../../components/motion/StaggerItem";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
+import SkillNetwork from "./SkillNetwork";
 import styles from "./SkillsSection.module.scss";
 
 type SkillCategory = {
@@ -42,16 +42,9 @@ export default function SkillsSection() {
 
   return (
     <section id="skill" className={styles.section}>
-      <GeometricShapes
-        variant="skills"
-        skillData={skillCategories}
-        hoveredSkill={hoveredSkill}
-      />
-      <div className={styles.content}>
-        <ScrollReveal>
-          <SectionHeading name="skills" />
-        </ScrollReveal>
-        <div className={styles.grid}>
+      <SectionHeading name="skills" index="02" label="Tech stack" />
+      <div className={styles.layout}>
+        <div className={styles.categories}>
           {skillCategories.map((category) => (
             <div key={category.name} className={styles.item}>
               <ScrollReveal>
@@ -62,8 +55,11 @@ export default function SkillsSection() {
                   <StaggerItem key={skill}>
                     <span
                       className={`${styles.badge} ${styles[category.colorClass]}`}
+                      tabIndex={0}
                       onMouseEnter={() => setHoveredSkill(skill)}
                       onMouseLeave={() => setHoveredSkill(null)}
+                      onFocus={() => setHoveredSkill(skill)}
+                      onBlur={() => setHoveredSkill(null)}
                     >
                       {skill}
                     </span>
@@ -72,6 +68,10 @@ export default function SkillsSection() {
               </StaggerContainer>
             </div>
           ))}
+        </div>
+
+        <div className={styles.visual}>
+          <SkillNetwork skillData={skillCategories} hoveredSkill={hoveredSkill} />
         </div>
       </div>
     </section>
