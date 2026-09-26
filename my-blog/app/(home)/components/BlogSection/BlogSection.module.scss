@@ -1,85 +1,15 @@
 @use "../../../styles/variables" as *;
 
 .section {
-  padding: $section-padding;
+  padding: 140px $section-padding 120px;
   background: $color-bg-secondary;
 
   @media (max-width: $bp-tablet) {
-    padding: 50px $section-padding-mobile;
+    padding: 80px $section-padding-mobile 60px;
   }
 }
 
 .description {
   color: $color-gray-3;
-}
-
-// Blog grid
-.grid {
-  margin: 30px auto 0;
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 1fr 1fr;
-
-  @media (max-width: $bp-tablet) {
-    grid-template-columns: 1fr;
-  }
-
-  a {
-    &::after {
-      display: none;
-    }
-  }
-}
-
-.item {
-  display: flex;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    border-color: rgba($color-blue, 0.4);
-
-    .image {
-      border-color: $color-blue;
-      box-shadow: 0 0 12px rgba($color-blue, 0.3);
-    }
-  }
-}
-
-.image {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  padding: 5px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  box-sizing: border-box;
-  background: $color-sky-blue;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-  }
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 0 0 15px;
-}
-
-.title {
-  line-height: 140%;
-  font-size: 16px;
-}
-
-.date {
-  font-size: 13px;
-  color: $color-gray-1;
-  margin-top: 4px;
+  line-height: 2;
 }

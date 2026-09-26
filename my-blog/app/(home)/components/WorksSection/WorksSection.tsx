@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
-import StaggerContainer from "../../../components/motion/StaggerContainer";
-import StaggerItem from "../../../components/motion/StaggerItem";
-import AnimatedPopup from "../../../components/motion/AnimatedPopup";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import TerminalButton from "../../../components/TerminalButton/TerminalButton";
+import WorksBento from "../../../components/WorksBento/WorksBento";
 import type { WorkItem } from "../../../lib/works";
 import styles from "./WorksSection.module.scss";
 
@@ -16,52 +13,23 @@ type Props = {
 };
 
 export default function WorksSection({ works }: Props) {
-  const [openPopup, setOpenPopup] = useState<number | null>(null);
-
   return (
     <>
       <section id="works" className={styles.section}>
+        <SectionHeading name="works" args="'select'" index="03" label="Selected works" />
         <ScrollReveal>
-          <SectionHeading name="works" args="'select'" />
-          <div className={styles.description}>
-            私の制作実績です。
+          <p className={styles.description}>
+            これまでに手がけたサイト・デザインの一部です。
             <br />
-            全て見るには<Link href="/works">一覧ページ</Link>にアクセスしてください！
-          </div>
+            すべての実績は<Link href="/works">一覧ページ</Link>からご覧いただけます。
+          </p>
         </ScrollReveal>
       </section>
 
-      <StaggerContainer className={styles.grid}>
-        {works.map((work, index) => (
-          <StaggerItem key={index}>
-            <article
-              className={styles.item}
-              onClick={() => setOpenPopup(index)}
-            >
-              <img src={work.image} alt={work.title} className={styles.image} />
-              <div className={styles.overlay} />
-              <span className={styles.category}>{work.category}</span>
-              <h3 className={styles.title}>{work.title}</h3>
-            </article>
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
-
-      <AnimatedPopup
-        isOpen={openPopup !== null}
-        onClose={() => setOpenPopup(null)}
-      >
-        {openPopup !== null && (
-          <img
-            src={works[openPopup].fullImage}
-            alt={works[openPopup].title}
-            style={{ width: "100%", display: "block" }}
-          />
-        )}
-      </AnimatedPopup>
+      <WorksBento works={works} />
 
       <ScrollReveal className={styles.moreButton}>
-        <TerminalButton label="もっと見る" href="/works" />
+        <TerminalButton label="すべての実績を見る" href="/works" />
       </ScrollReveal>
     </>
   );

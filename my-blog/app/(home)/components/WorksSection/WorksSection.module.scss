@@ -1,97 +1,24 @@
 @use "../../../styles/variables" as *;
 
 .section {
-  padding: $section-padding;
+  padding: 140px $section-padding 56px;
   background: $color-bg-primary;
 
   @media (max-width: $bp-tablet) {
-    padding: 50px $section-padding-mobile;
+    padding: 80px $section-padding-mobile 36px;
   }
 }
 
 .description {
   color: $color-gray-3;
-}
-
-// Works grid
-.grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  @media (max-width: $bp-tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $bp-mobile) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.item {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  cursor: pointer;
-
-  &:hover {
-    .image {
-      transform: scale(1.08);
-    }
-    .overlay {
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
-    }
-    .title {
-      @include glow($color-white, 4px);
-    }
-  }
-}
-
-.image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
-  transition: background 0.5s ease;
-  pointer-events: none;
-}
-
-.category {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 3px 12px;
-  font-size: 12px;
-  border-radius: 4px;
-  @include glassmorphism(0.2, 8px);
-  color: $color-white;
-}
-
-.title {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  font-size: 20px;
-  transition: text-shadow 0.3s ease;
+  line-height: 2;
 }
 
 .moreButton {
-  padding-bottom: 100px;
+  padding-bottom: 120px;
+  background: $color-bg-primary;
 
   @media (max-width: $bp-tablet) {
-    padding-bottom: 50px;
+    padding-bottom: 60px;
   }
 }

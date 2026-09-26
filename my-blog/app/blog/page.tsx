@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getAllPosts } from "../lib/blog";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
 import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
+import PostList from "../components/PostList/PostList";
 import styles from "./page.module.scss";
 
 export const metadata = {
@@ -16,27 +16,10 @@ export default function BlogArchive() {
       <Breadcrumb items={[{ label: "Blog" }]} />
       <SectionHeading name="blog" args="'all'" />
       <p className={styles.description}>
-        私の技術ブログです。
-        <br />
-        主にWEBのフロントエンド開発についての記事を書いています。
+        フロントエンド開発を中心に、学んだことや実務の知見をまとめている技術ブログです。
       </p>
 
-      <div className={styles.grid}>
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className={styles.link}>
-            <article className={styles.item}>
-              <div className={styles.image}>
-                <img src={post.image} alt="" />
-              </div>
-              <div className={styles.body}>
-                <h3 className={styles.title}>{post.title}</h3>
-                <p className={styles.desc}>{post.description}</p>
-                <span className={styles.date}>{post.date}</span>
-              </div>
-            </article>
-          </Link>
-        ))}
-      </div>
+      <PostList posts={posts} />
     </main>
   );
 }

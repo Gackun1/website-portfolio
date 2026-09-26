@@ -1,7 +1,7 @@
 import { getAllWorks } from "../lib/works";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
 import Breadcrumb from "../components/Breadcrumb/Breadcrumb";
-import WorksGrid from "./WorksGrid";
+import WorksBento from "../components/WorksBento/WorksBento";
 import styles from "./page.module.scss";
 
 export const metadata = {
@@ -17,12 +17,12 @@ export default function WorksArchive() {
         <Breadcrumb items={[{ label: "Works" }]} />
         <SectionHeading name="works" args="'all'" />
         <p className={styles.description}>
-          私の制作実績です。
+          これまでに手がけたサイト・デザインの実績です。
           <br />
-          サムネイルをクリックすると全体を確認できます。
+          サムネイルを選択すると、ページ全体のデザインをご覧いただけます。
         </p>
       </div>
-      <WorksGrid works={works} />
+      <WorksBento works={works} />
     </main>
   );
 }

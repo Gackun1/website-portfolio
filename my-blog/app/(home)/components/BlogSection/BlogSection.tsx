@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import PostList from "../../../components/PostList/PostList";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
-import StaggerContainer from "../../../components/motion/StaggerContainer";
-import StaggerItem from "../../../components/motion/StaggerItem";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import TerminalButton from "../../../components/TerminalButton/TerminalButton";
 import type { PostMeta } from "../../../lib/blog";
@@ -16,35 +14,17 @@ type Props = {
 export default function BlogSection({ posts }: Props) {
   return (
     <section id="blog" className={styles.section}>
+      <SectionHeading name="blog" args="'desc'" index="04" label="Writing" />
       <ScrollReveal>
-        <SectionHeading name="blog" args="'desc'" />
-        <div className={styles.description}>
-          私の技術ブログです。
-          <br />
-          主にWEBのフロントエンド開発についての記事を書いています。
-        </div>
+        <p className={styles.description}>
+          フロントエンド開発を中心に、学んだことや実務の知見をまとめている技術ブログです。
+        </p>
       </ScrollReveal>
 
-      <StaggerContainer className={styles.grid} staggerDelay={0.1}>
-        {posts.map((post) => (
-          <StaggerItem key={post.slug}>
-            <Link href={`/blog/${post.slug}`}>
-              <article className={styles.item}>
-                <div className={styles.image}>
-                  <img src={post.image} alt="" />
-                </div>
-                <div className={styles.body}>
-                  <h3 className={styles.title}>{post.title}</h3>
-                  <span className={styles.date}>{post.date}</span>
-                </div>
-              </article>
-            </Link>
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
+      <PostList posts={posts} />
 
       <ScrollReveal>
-        <TerminalButton label="もっと見る" href="/blog" />
+        <TerminalButton label="記事一覧を見る" href="/blog" />
       </ScrollReveal>
     </section>
   );

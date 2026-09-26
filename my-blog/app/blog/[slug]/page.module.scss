@@ -26,8 +26,10 @@
   }
 }
 
+// 1行 40 字前後に収まる読みやすい行長
 .article {
-  margin: 30px 0;
+  max-width: 780px;
+  margin: 30px 0 60px;
 }
 
 .meta {
@@ -43,15 +45,16 @@
   flex-shrink: 0;
   width: 80px;
   height: 80px;
-  padding: 5px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   box-sizing: border-box;
-  background: $color-sky-blue;
 
   img {
     height: 100%;
     width: 100%;
     object-fit: contain;
+    filter: invert(1) brightness(0.9);
   }
 }
 
@@ -73,7 +76,7 @@
 
 // Prose typography for markdown content
 .prose {
-  line-height: 1.8;
+  line-height: 2;
   color: $color-gray-3;
 
   h2 {

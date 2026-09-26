@@ -1,0 +1,56 @@
+@use "../../styles/variables" as *;
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 36px 0;
+  background: $color-black-2;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  @media (max-width: $bp-tablet) {
+    padding: 22px 0;
+  }
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-code;
+  font-size: clamp(44px, 7vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  * {
+    line-height: 1;
+    letter-spacing: inherit;
+  }
+}
+
+.solid {
+  color: $color-white;
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba($color-white, 0.55);
+}
+
+.sep {
+  margin: 0 0.45em;
+  color: $color-green;
+  font-size: 0.6em;
+}
