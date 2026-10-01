@@ -53,7 +53,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className={styles.section}>
       <ScrollReveal>
-        <SectionHeading name="contact" args="message" />
+        <SectionHeading name="contact" args="message" index="05" label="Get in touch" />
         <div className={styles.description}>制作のご依頼、ご相談などはこちらのフォームからお気軽にお問い合わせください。</div>
       </ScrollReveal>
 

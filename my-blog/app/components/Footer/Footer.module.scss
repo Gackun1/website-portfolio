@@ -1,11 +1,149 @@
 @use "../../styles/variables" as *;
 
-.cFooter {
-  padding: 30px;
-  text-align: center;
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  padding: 80px $section-padding 28px;
   background: $color-black-2;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+  @media (max-width: $bp-tablet) {
+    padding: 56px $section-padding-mobile 20px;
+  }
+
+  a::after {
+    display: none;
+  }
 }
 
-.cFooterCopy {
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px 40px;
+  flex-wrap: wrap;
+}
+
+.tagline {
+  color: $color-gray-3;
+  font-size: 15px;
+}
+
+.comment {
   color: $color-gray-1;
+  font-family: $font-code;
+}
+
+// 5つのリンクは右寄せの横並び
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 32px;
+  margin-left: auto;
+
+  @media (max-width: $bp-tablet) {
+    justify-content: flex-start;
+    gap: 8px 24px;
+    margin-left: 0;
+  }
+}
+
+.link,
+.toTop {
+  font-family: $font-code;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: $color-gray-1;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-green;
+  }
+}
+
+// 右下 (コピーライトと同じ行) に絶対配置
+.toTop {
+  position: absolute;
+  right: $section-padding;
+  bottom: 28px;
+
+  span {
+    display: inline-block;
+    transition: transform 0.4s $ease;
+  }
+
+  &:hover span {
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: $bp-tablet) {
+    right: $section-padding-mobile;
+    bottom: 20px;
+  }
+}
+
+// ==========================================
+// Wordmark — アウトラインの描画アニメーション
+// ==========================================
+.wordmark {
+  margin: 56px 0 24px;
+
+  @media (max-width: $bp-tablet) {
+    margin: 40px 0 16px;
+  }
+}
+
+.wordmarkSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.wordmarkText {
+  font-family: $font-code;
+  font-weight: 700;
+  fill: transparent;
+  stroke: rgba($color-white, 0.28);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  letter-spacing: -0.02em;
+
+  tspan {
+    // 1文字の輪郭長より十分長いダッシュで "未描画" を表現
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+    transition: stroke-dashoffset 2.8s cubic-bezier(0.65, 0, 0.35, 1), fill 1.2s ease 2.4s;
+  }
+
+  .accent {
+    stroke: rgba($color-red, 0.75);
+  }
+
+  &.drawn tspan {
+    stroke-dashoffset: 0;
+    fill: rgba($color-white, 0.02);
+  }
+
+  &.drawn .accent {
+    fill: rgba($color-red, 0.05);
+  }
+}
+
+.bottom {
+  small {
+    font-family: $font-code;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: $color-gray-1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmarkText tspan {
+    transition: none;
+  }
 }

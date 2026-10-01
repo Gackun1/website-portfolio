@@ -1,11 +1,11 @@
 @use "../../../styles/variables" as *;
 
 .section {
-  padding: $section-padding;
+  padding: 140px $section-padding;
   background: $color-bg-primary;
 
   @media (max-width: $bp-tablet) {
-    padding: $section-padding-mobile;
+    padding: 80px $section-padding-mobile;
   }
 }
 
@@ -99,10 +99,11 @@
 .terminal {
   overflow-y: auto;
   border-radius: 8px;
-  background: #1e1e2e;
+  background: $color-black-2;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba($color-green, 0.04);
   font-family: $font-code;
-  font-size: 18px;
+  font-size: 17px;
 
   @media (max-width: $bp-tablet) {
     max-height: 300px;
