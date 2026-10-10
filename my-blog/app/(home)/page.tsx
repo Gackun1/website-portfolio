@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main>
-      <HeroSection />
+      <HeroSection visual="pathPlus" />
       <AboutSection />
       <SkillsSection />
       <Marquee items={["Design", "Code", "Motion", "Interaction"]} />

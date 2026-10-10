@@ -23,17 +23,17 @@ const skillCategories: SkillCategory[] = [
   {
     name: "Backend / CMS",
     colorClass: "backend",
-    skills: ["PHP", "Node.js", "MySQL", "WordPress", "Shopify", "MicroCMS"],
+    skills: ["PHP", "Node.js", "MySQL", "WordPress", "Movable Type", "HeartCore", "Shopify", "MicroCMS"],
   },
   {
     name: "Design",
     colorClass: "design",
-    skills: ["Figma", "Illustrator", "Photoshop", "XD", "UI/UX"],
+    skills: ["Figma", "Illustrator", "Photoshop", "XD", "Premiere Pro", "After Effects", "UI/UX"],
   },
   {
     name: "Quality",
     colorClass: "quality",
-    skills: ["SEO", "アクセシビリティ", "コアウェブバイタル"],
+    skills: ["SEO", "Accessibility", "Core Web Vitals"],
   },
 ];
 

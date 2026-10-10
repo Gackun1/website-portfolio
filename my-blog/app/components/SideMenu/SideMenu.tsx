@@ -116,7 +116,6 @@ export default function SideMenu() {
                 className={`${styles.overlayNavItem} ${isActive ? styles.active : ""}`}
                 onClick={(e) => handleSmoothScroll(e, item.id)}
               >
-                <span className={styles.overlayIndex}>{String(navItems.indexOf(item) + 1).padStart(2, "0")}</span>
                 {item.label}
               </Link>
             );
@@ -148,7 +147,6 @@ export default function SideMenu() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className={styles.navIndex}>{String(navItems.indexOf(item) + 1).padStart(2, "0")}</span>
                 <span className={styles.navLabel}>{item.label}</span>
               </Link>
             );

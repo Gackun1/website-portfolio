@@ -75,36 +75,13 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   text-wrap: pretty;
 }
 
-.bio {
-  @extend %phrase-wrap;
-  color: $color-gray-3;
-  font-size: 15px;
-  line-height: 2.1;
-}
+// 図 — 2カラム時はスクロール中も追従させる
+.diagram {
+  position: sticky;
+  top: 100px;
 
-.facts {
-  margin-top: 36px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.fact {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  dt {
-    font-family: $font-code;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: $color-gray-1;
-  }
-
-  dd {
-    font-size: 14px;
-    color: $color-white;
+  @media (max-width: $bp-tablet) {
+    position: static;
   }
 }
 
@@ -113,7 +90,10 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .service {
+  --accent: #{$color-green};
   position: relative;
+  cursor: default;
+  outline: none;
   display: grid;
   grid-template-columns: 56px 1fr;
   gap: 8px;
@@ -128,20 +108,30 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
     bottom: -1px;
     width: 100%;
     height: 1px;
-    background: $color-green;
+    background: var(--accent);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 0.7s $ease;
   }
 
-  &:hover {
+  &.active {
     &::before {
       transform: scaleX(1);
     }
 
-    .serviceNum {
-      color: $color-green;
+    .serviceNum,
+    .serviceTitle {
+      color: var(--accent);
     }
+
+    .serviceBody {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: 1px dashed var(--accent);
+    outline-offset: 4px;
   }
 
   @media (max-width: $bp-tablet) {
@@ -161,6 +151,7 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 
 .serviceTitle {
   margin-bottom: 8px;
+  transition: color 0.4s ease;
   font-family: $font-display;
   font-size: clamp(20px, 1.9vw, 28px);
   font-weight: 600;
@@ -174,7 +165,16 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 
 .serviceBody {
   @extend %phrase-wrap;
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
   color: $color-gray-3;
   font-size: 14px;
   line-height: 2;
+}
+
+// 改行位置は PC 幅でのみ固定。狭い画面では文節で自然に折り返す
+.br {
+  @media (max-width: $bp-tablet) {
+    display: none;
+  }
 }

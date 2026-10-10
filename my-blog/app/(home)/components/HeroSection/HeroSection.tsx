@@ -2,29 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ParticleLogo } from "../../../components/LogoVisual";
+import { ParticleLogo, PathLogo, PathLogoPlus } from "../../../components/LogoVisual";
 import styles from "./HeroSection.module.scss";
-
-/** 東京の現在時刻 — SSR とのズレを避けるためマウント後に描画 */
-function TokyoClock() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat("ja-JP", {
-      timeZone: "Asia/Tokyo",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
-    const update = () => setTime(fmt.format(new Date()));
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  return <span className={styles.clock}>{time || "--:--:--"}</span>;
-}
 
 type Segment = { text: string; className?: string };
 
@@ -106,21 +85,35 @@ const hudTransition = (delay: number) => ({
   transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
-export default function HeroSection() {
+/** MV のロゴビジュアル (components/LogoVisual) */
+const VISUALS = {
+  particle: ParticleLogo, // WebGL パーティクル版
+  pathPlus: PathLogoPlus, // パス描画のブラッシュアップ版
+  path: PathLogo, // 初期のパス描画版
+} as const;
+
+export type HeroVisual = keyof typeof VISUALS;
+
+interface Props {
+  /** ロゴビジュアルの種類 */
+  visual?: HeroVisual;
+  /** 背景の塵パーティクルを表示するか */
+  dust?: boolean;
+}
+
+export default function HeroSection({ visual = "particle", dust = true }: Props) {
+  const Visual = VISUALS[visual];
+
   return (
     <section id="top" className={styles.section}>
-      {/* MV は ParticleLogo / PathLogoPlus / PathLogo を差し替え可能 (components/LogoVisual) */}
-      <ParticleLogo />
+      <Visual dust={dust} />
       <div className={styles.vignette} aria-hidden="true" />
 
       <motion.div className={styles.hudTop} {...hudTransition(2.6)}>
-        <span className={styles.hudLabel}>
-          <span className={styles.hudDot} />
-          Frontend Developer &amp; Designer
-        </span>
-        <span className={styles.hudLabel}>
-          Tokyo, JP — <TokyoClock />
-        </span>
+        <p className={styles.hudLabel}>
+          <span className={styles.comment}>{"// "}</span>
+          Glad you stopped by.
+        </p>
       </motion.div>
 
       <Typewriter />

@@ -1,15 +1,17 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ScrollReveal from "../../../components/motion/ScrollReveal";
 import ScrubText, { type Phrase } from "../../../components/motion/ScrubText";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
+import AboutDiagram, { DIAGRAM_COLORS } from "./AboutDiagram";
 import styles from "./AboutSection.module.scss";
 
 /**
  * About — "何者で、何を頼めて、どう仕事をするか" を伝えるセクション
  *
  * 1. Statement : スクロールに合わせて点灯する大きなリード文 (考え方)
- * 2. Profile   : 短い自己紹介と基本情報 (何者か)
+ * 2. Diagram   : ホバー中の領域を図で見せる (AboutDiagram)
  * 3. Services  : 依頼できること 3 つ (何を頼めるか)
  */
 
@@ -21,28 +23,41 @@ const statement: Phrase[][] = [
   [{ text: "“伝わる”", accent: true }, { text: "ウェブを" }, { text: "つくります。" }],
 ];
 
-const facts = [
-  { label: "Based in", value: "Tokyo, Japan" },
-  { label: "Work style", value: "Freelance" },
-  { label: "Background", value: "HAL" },
-];
-
 const services = [
   {
-    title: "Web Design",
-    body: "目的とターゲットの整理から、情報設計・UI デザインまで。Figma で意図の伝わる画面を組み立てます。",
+    title: "Frontend & CMS",
+    body: [
+      "デザインを忠実に、保守しやすいコードで実装。",
+      "WordPress や Movable Type などの CMS 構築、オリジナルテーマの開発まで一貫して対応します。",
+    ],
   },
   {
-    title: "Front-end & WordPress",
-    body: "デザインを忠実に、かつ保守しやすく実装。WordPress のオリジナルテーマ開発を得意としています。",
+    title: "Design & Motion",
+    body: [
+      "目的とターゲットの整理から、情報設計・UI デザインまで。",
+      "触れて心地よいアニメーションで、体験をもう一段引き上げます。",
+    ],
   },
   {
-    title: "SEO & Motion",
-    body: "検索エンジンに正しく伝わる構造と表示速度。そして、触れて心地よいアニメーションで体験を一段引き上げます。",
+    title: "SEO & Performance",
+    body: [
+      "検索エンジンに正しく伝わる構造と、待たせない表示速度。",
+      "Core Web Vitals を指標に、見つけてもらえて離脱されないサイトに仕上げます。",
+    ],
   },
 ];
 
 export default function AboutSection() {
+  const [active, setActive] = useState(0);
+
+  // ホバーできない端末では図を自動で切り替える
+  useEffect(() => {
+    if (!window.matchMedia("(hover: none)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setActive((i) => (i + 1) % services.length), 4500);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section id="about" className={styles.section}>
       <SectionHeading name="about" index="01" label="Who I am" />
@@ -56,29 +71,33 @@ export default function AboutSection() {
       />
 
       <div className={styles.grid}>
-        <ScrollReveal className={styles.profile}>
-          <p className={styles.bio}>
-            フロントエンド開発者・デザイナーのGackunです。HALを卒業後、東京を拠点にフリーランスとして活動しています。デザインからコーディングまでを一人で一貫して担当できるので、意図がぶれずに形になります。
-          </p>
-          <dl className={styles.facts}>
-            {facts.map((f) => (
-              <div key={f.label} className={styles.fact}>
-                <dt>{f.label}</dt>
-                <dd>{f.value}</dd>
-              </div>
-            ))}
-          </dl>
+        <ScrollReveal className={styles.diagram}>
+          <AboutDiagram active={active} />
         </ScrollReveal>
 
         <ol className={styles.services}>
           {services.map((s, i) => (
             <li key={s.title}>
               <ScrollReveal delay={i * 0.08}>
-                <div className={styles.service}>
+                <div
+                  className={`${styles.service} ${i === active ? styles.active : ""}`}
+                  style={{ ["--accent" as string]: DIAGRAM_COLORS[i] }}
+                  tabIndex={0}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                >
                   <span className={styles.serviceNum}>{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className={styles.serviceTitle}>{s.title}</h3>
-                    <p className={styles.serviceBody}>{s.body}</p>
+                    <p className={styles.serviceBody}>
+                      {s.body.map((line, li) => (
+                        <span key={li}>
+                          {li > 0 && <br className={styles.br} />}
+                          {line}
+                        </span>
+                      ))}
+                    </p>
                   </div>
                 </div>
               </ScrollReveal>
