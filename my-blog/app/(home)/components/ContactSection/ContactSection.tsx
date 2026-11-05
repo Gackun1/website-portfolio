@@ -7,6 +7,8 @@ import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import TerminalButton from "../../../components/TerminalButton/TerminalButton";
 import styles from "./ContactSection.module.scss";
 
+const CONTACT_API_URL = "https://api.gackun.com/v1/contact-form/";
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     inquiryType: "",
@@ -31,7 +33,7 @@ export default function ContactSection() {
     setFormResult("");
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
