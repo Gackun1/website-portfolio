@@ -1,12 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "portfolio-contact",
+  "name": "gackun-api",
   "main": "src/index.ts",
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat"],
   "vars": {
     "MAIL_TO": "gaku.yoshikawa@gmail.com",
-    "ALLOWED_ORIGINS": "http://localhost:3000"
+    "ALLOWED_ORIGINS": "https://gackun.com,http://localhost:3000"
   }
   // GMAIL_USER / GMAIL_APP_PASSWORD は secret で設定 (npx wrangler secret put GMAIL_USER)
 }

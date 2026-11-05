@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-contact",
+  "name": "gackun-api",
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
