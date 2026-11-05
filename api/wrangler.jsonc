@@ -6,8 +6,9 @@
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   "vars": {
-    "MAIL_TO": "gaku.yoshikawa@gmail.com",
-    "ALLOWED_ORIGINS": "https://gackun.com,http://localhost:3000"
+    "ALLOWED_ORIGINS": "https://gackun.com,http://localhost:3000",
+    "GMAIL_USER": "gaku090707@gmail.com",
+    "MAIL_TO": "gaku090707@gmail.com"
   }
-  // GMAIL_USER / GMAIL_APP_PASSWORD は secret で設定 (npx wrangler secret put GMAIL_USER)
+  // GMAIL_APP_PASSWORD は secret で設定
 }
