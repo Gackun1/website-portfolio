@@ -1,8 +1,7 @@
 ---
 title: "宝塚ローズ倶楽部"
 category: "web site"
-image: "/img/works/takarazuka-rose.jpg"
-fullImage: "/img/works/takarazuka-rose_full.jpg"
+secret: true
 order: 5
 ---
 

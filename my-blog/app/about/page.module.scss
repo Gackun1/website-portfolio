@@ -1,0 +1,19 @@
+@use "../styles/variables" as *;
+
+.page {
+  background: $color-bg-primary;
+  min-height: 100vh;
+}
+
+// パンくずだけを置き、About セクションの上余白に重ねて間延びを防ぐ
+.header {
+  position: relative;
+  z-index: 1;
+  padding: $section-padding $section-padding 0;
+  margin-bottom: -100px;
+
+  @media (max-width: $bp-tablet) {
+    padding: 72px $section-padding-mobile 0;
+    margin-bottom: -60px;
+  }
+}

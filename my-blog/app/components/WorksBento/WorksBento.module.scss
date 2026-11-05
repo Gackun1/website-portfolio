@@ -179,3 +179,29 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
     transform: none;
   }
 }
+
+// ==========================================
+// Secret (画像非公開の案件)
+// ==========================================
+.secret {
+  cursor: default;
+  // 斜めストライプで「伏せてある」感を出す
+  background:
+    repeating-linear-gradient(-45deg, rgba($color-white, 0.035) 0 1px, transparent 1px 14px),
+    $color-black-2;
+}
+
+.secretLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  font-family: $font-code;
+  font-size: clamp(22px, 3vw, 44px);
+  letter-spacing: 0.4em;
+  // letter-spacing の右余白分だけ中心を補正
+  padding-left: 0.4em;
+  color: rgba($color-white, 0.18);
+  white-space: nowrap;
+  pointer-events: none;
+}

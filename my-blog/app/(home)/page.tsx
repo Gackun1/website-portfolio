@@ -5,6 +5,7 @@ import WorksSection from "./components/WorksSection/WorksSection";
 import BlogSection from "./components/BlogSection/BlogSection";
 import ContactSection from "./components/ContactSection/ContactSection";
 import Marquee from "../components/Marquee/Marquee";
+import SectionIndicator from "../components/SectionIndicator/SectionIndicator";
 import { getAllPosts } from "../lib/blog";
 import { getAllWorks } from "../lib/works";
 
@@ -14,6 +15,7 @@ export default function Home() {
 
   return (
     <main>
+      <SectionIndicator />
       <HeroSection visual="pathPlus" />
       <AboutSection />
       <SkillsSection />

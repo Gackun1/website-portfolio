@@ -64,6 +64,11 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
+// 現在地 (サイドメニューと同じく緑のアクセント)
+.link.active {
+  color: $color-green;
+}
+
 // 右下 (コピーライトと同じ行) に絶対配置
 .toTop {
   position: absolute;

@@ -67,8 +67,8 @@ export default function ContactSection() {
               </label>
               <select name="inquiry_type" id="inquiry_type" value={formData.inquiryType} onChange={(e) => handleInputChange("inquiryType", e.target.value)}>
                 <option value="">- 選択してください -</option>
-                <option value="works">制作のご依頼</option>
-                <option value="consultation">お見積もり・ご相談</option>
+                <option value="request">ご依頼</option>
+                <option value="consultation">ご相談</option>
                 <option value="other">その他</option>
               </select>
             </div>

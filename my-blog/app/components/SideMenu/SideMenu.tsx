@@ -4,53 +4,19 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { isCurrentNav, navItems, snsLinks, type NavItem } from "../../lib/nav";
 import styles from "./SideMenu.module.scss";
-
-const navItems = [
-  { id: "about", label: "About" },
-  { id: "skill", label: "Skill" },
-  { id: "works", label: "Works" },
-  { id: "blog", label: "Blog" },
-  { id: "contact", label: "Contact" },
-];
 
 export default function SideMenu() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  const [activeSection, setActiveSection] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
+  // ページ遷移したらモバイルメニューを閉じる
   useEffect(() => {
-    if (!isHome) {
-      setActiveSection("");
-      return;
-    }
-
-    const sectionIds = navItems.map((item) => item.id);
-    const observers: IntersectionObserver[] = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
-          });
-        },
-        { rootMargin: "-30% 0px -60% 0px" }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, [isHome]);
+    setIsOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (isOpen) {
@@ -63,20 +29,12 @@ export default function SideMenu() {
     };
   }, [isOpen]);
 
-  const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    sectionId: string
-  ) => {
-    if (!isHome) return; // 下層ページではNext.jsナビゲーションに任せる
+  // トップにいるときの Home はページ遷移せず先頭へスクロール
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
+    if (!isHome || item.href !== "/") return; // それ以外はNext.jsナビゲーションに任せる
 
     e.preventDefault();
-    const targetElement = document.getElementById(sectionId);
-    if (targetElement) {
-      const rectTop = targetElement.getBoundingClientRect().top;
-      const offsetTop = window.pageYOffset;
-      const top = rectTop + offsetTop;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setIsOpen(false);
   };
 
@@ -87,9 +45,6 @@ export default function SideMenu() {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setIsOpen(false);
   };
-
-  const getNavHref = (sectionId: string) =>
-    isHome ? `#${sectionId}` : `/#${sectionId}`;
 
   return (
     <>
@@ -108,13 +63,14 @@ export default function SideMenu() {
       <div className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ""}`}>
         <nav className={styles.overlayNav}>
           {navItems.map((item) => {
-            const isActive = isHome && activeSection === item.id;
+            const isActive = isCurrentNav(item, pathname);
             return (
               <Link
-                key={item.id}
-                href={getNavHref(item.id)}
+                key={item.href}
+                href={item.href}
                 className={`${styles.overlayNavItem} ${isActive ? styles.active : ""}`}
-                onClick={(e) => handleSmoothScroll(e, item.id)}
+                aria-current={isActive ? "page" : undefined}
+                onClick={(e) => handleNavClick(e, item)}
               >
                 {item.label}
               </Link>
@@ -132,13 +88,14 @@ export default function SideMenu() {
         </div>
         <nav className={styles.nav}>
           {navItems.map((item) => {
-            const isActive = isHome && activeSection === item.id;
+            const isActive = isCurrentNav(item, pathname);
             return (
               <Link
-                key={item.id}
-                href={getNavHref(item.id)}
+                key={item.href}
+                href={item.href}
                 className={`${styles.navItem} ${isActive ? styles.active : ""}`}
-                onClick={(e) => handleSmoothScroll(e, item.id)}
+                aria-current={isActive ? "page" : undefined}
+                onClick={(e) => handleNavClick(e, item)}
               >
                 {isActive && (
                   <motion.span
@@ -153,15 +110,18 @@ export default function SideMenu() {
           })}
         </nav>
         <div className={styles.sns}>
-          <a href="#" className={styles.snsItem} aria-label="Instagram">
-            <img src="/img/i_instagram.png" alt="" />
-          </a>
-          <a href="#" className={styles.snsItem} aria-label="X (Twitter)">
-            <img src="/img/i_twitter.png" alt="" />
-          </a>
-          <a href="#" className={styles.snsItem} aria-label="YouTube">
-            <img src="/img/i_youtube.png" alt="" />
-          </a>
+          {snsLinks.map((sns) => (
+            <a
+              key={sns.label}
+              href={sns.href}
+              className={styles.snsItem}
+              aria-label={`${sns.label} (新しいタブで開く)`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={sns.icon} alt="" />
+            </a>
+          ))}
         </div>
       </header>
     </>

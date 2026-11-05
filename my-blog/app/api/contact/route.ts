@@ -7,8 +7,8 @@ interface ContactBody {
 }
 
 const INQUIRY_LABELS: Record<string, string> = {
-  works: "制作のご依頼",
-  consultation: "お見積もり・ご相談",
+  request: "ご依頼",
+  consultation: "ご相談",
   other: "その他",
 };
 

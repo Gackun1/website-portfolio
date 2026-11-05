@@ -41,32 +41,48 @@ export default function WorksBento({ works, layout = "bento" }: Props) {
         <StaggerContainer className={styles.grid} staggerDelay={0.1}>
           {works.map((work, index) => (
             <StaggerItem key={work.slug} className={`${styles.cell} ${layout === "bento" ? spanClasses(index, works.length) : ""}`}>
-              <article
-                className={styles.item}
-                role="button"
-                tabIndex={0}
-                aria-label={`${work.title} の画像を拡大表示`}
-                onClick={() => setOpenPopup(index)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setOpenPopup(index);
-                  }
-                }}
-              >
-                <img src={work.image} alt="" className={styles.image} loading="lazy" />
-                <div className={styles.overlay} />
-                <span className={styles.num}>{String(index + 1).padStart(2, "0")}</span>
-                <div className={styles.info}>
-                  <div>
-                    <span className={styles.category}>{work.category}</span>
-                    <h3 className={styles.title}>{work.title}</h3>
-                  </div>
-                  <span className={styles.view}>
-                    View <span aria-hidden="true">↗</span>
+              {work.secret ? (
+                // 画像非公開の案件: 拡大できないただのカード
+                <article className={`${styles.item} ${styles.secret}`}>
+                  <span className={styles.secretLabel} aria-hidden="true">
+                    SECRET
                   </span>
-                </div>
-              </article>
+                  <span className={styles.num}>{String(index + 1).padStart(2, "0")}</span>
+                  <div className={styles.info}>
+                    <div>
+                      <span className={styles.category}>{work.category}</span>
+                      <h3 className={styles.title}>{work.title}</h3>
+                    </div>
+                  </div>
+                </article>
+              ) : (
+                <article
+                  className={styles.item}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${work.title} の画像を拡大表示`}
+                  onClick={() => setOpenPopup(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setOpenPopup(index);
+                    }
+                  }}
+                >
+                  <img src={work.image} alt="" className={styles.image} loading="lazy" />
+                  <div className={styles.overlay} />
+                  <span className={styles.num}>{String(index + 1).padStart(2, "0")}</span>
+                  <div className={styles.info}>
+                    <div>
+                      <span className={styles.category}>{work.category}</span>
+                      <h3 className={styles.title}>{work.title}</h3>
+                    </div>
+                    <span className={styles.view}>
+                      View <span aria-hidden="true">↗</span>
+                    </span>
+                  </div>
+                </article>
+              )}
             </StaggerItem>
           ))}
         </StaggerContainer>

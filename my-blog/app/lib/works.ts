@@ -11,6 +11,8 @@ export type WorkItem = {
   category: string;
   image: string;
   fullImage: string;
+  /** 画像を公開できない案件 (SECRET 表示・拡大なし) */
+  secret: boolean;
   order: number;
 };
 
@@ -38,8 +40,9 @@ export function getAllWorks(): WorkItem[] {
         slug,
         title: data.title,
         category: data.category,
-        image: data.image,
-        fullImage: data.fullImage,
+        image: data.image ?? "",
+        fullImage: data.fullImage ?? "",
+        secret: data.secret ?? false,
         order: data.order ?? 0,
       };
     })
@@ -57,8 +60,9 @@ export function getWorkBySlug(slug: string): Work {
     slug,
     title: data.title,
     category: data.category,
-    image: data.image,
-    fullImage: data.fullImage,
+    image: data.image ?? "",
+    fullImage: data.fullImage ?? "",
+    secret: data.secret ?? false,
     order: data.order ?? 0,
     contentHtml,
   };

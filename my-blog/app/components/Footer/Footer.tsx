@@ -1,14 +1,6 @@
-import Link from "next/link";
 import FooterWordmark from "./FooterWordmark";
+import FooterNav from "./FooterNav";
 import styles from "./Footer.module.scss";
-
-const links = [
-  { id: "about", label: "About" },
-  { id: "skill", label: "Skill" },
-  { id: "works", label: "Works" },
-  { id: "blog", label: "Blog" },
-  { id: "contact", label: "Contact" },
-];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,13 +12,7 @@ export default function Footer() {
           <span className={styles.comment}>{"// "}</span>
           Thanks for scrolling.
         </p>
-        <nav className={styles.nav} aria-label="フッターナビゲーション">
-          {links.map((l) => (
-            <Link key={l.id} href={`/#${l.id}`} className={styles.link}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
+        <FooterNav />
       </div>
 
       <FooterWordmark />
