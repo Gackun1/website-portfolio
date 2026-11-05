@@ -13,12 +13,6 @@ import {
 } from "framer-motion";
 import styles from "./Marquee.module.scss";
 
-/**
- * Marquee — スクロール速度に反応して流れるテキスト帯
- * 通常はゆっくり流れ、スクロールすると加速・向きが反転する。
- * セクションの区切りに "動く余白" をつくるための装飾。
- */
-
 const COPIES = 4;
 
 function wrap(min: number, max: number, v: number) {
@@ -32,6 +26,7 @@ interface Props {
   baseVelocity?: number;
 }
 
+/** スクロール速度に応じて加速・反転するテキスト帯 */
 export default function Marquee({ items, baseVelocity = -2 }: Props) {
   const reduce = useReducedMotion();
   const baseX = useMotionValue(0);

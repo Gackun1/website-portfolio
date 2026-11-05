@@ -181,11 +181,10 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 // ==========================================
-// Secret (画像非公開の案件)
+// Secret
 // ==========================================
 .secret {
   cursor: default;
-  // 斜めストライプで「伏せてある」感を出す
   background:
     repeating-linear-gradient(-45deg, rgba($color-white, 0.035) 0 1px, transparent 1px 14px),
     $color-black-2;

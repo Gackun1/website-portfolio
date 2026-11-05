@@ -4,19 +4,13 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { useInView, useReducedMotion } from "framer-motion";
 import styles from "./Footer.module.scss";
 
-/**
- * FooterWordmark — 画面幅いっぱいの "Gackun." がアウトラインで描かれていく
- *
- * SVG <text> の stroke-dashoffset をアニメーションさせ、文字ごとに時間差で輪郭を描画する。
- * フォントに依らず横幅いっぱいに収まるよう、getBBox で viewBox を実寸に合わせる。
- */
-
 const SEGMENTS = [
   { text: "Gac", accent: true },
   { text: "kun.", accent: false },
 ];
 const FONT_SIZE = 200;
 
+/** getBBox で viewBox を実寸に合わせ、フォントに依らず横幅いっぱいに収める */
 export default function FooterWordmark() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<SVGTextElement>(null);

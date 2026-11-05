@@ -3,20 +3,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "framer-motion";
 
-/**
- * ScrubText — スクロール量に合わせて文字が順に点灯する文章
- * 読む速度とスクロールが同期し、ステートメントを "読ませる" ための演出。
- *
- * ■ 改行
- *   lines = 行の配列、各行 = 文節 (phrase) の配列。
- *   行は block、文節は折り返さない inline-block にしているので、
- *   広い画面では指定どおりの行で、狭い画面でも文節の切れ目でしか改行しない。
- *
- * ■ 進捗
- *   要素の上端が画面の START 位置に来た時点で 0、下端が END 位置に来た時点で 1。
- *   getBoundingClientRect から毎フレーム直接算出する (レイアウト変化にも追従)。
- */
-
 export type Phrase = { text: string; accent?: boolean };
 
 interface Props {
@@ -36,6 +22,7 @@ function Char({ char, progress, range }: { char: string; progress: MotionValue<n
   return <motion.span style={{ opacity }}>{char}</motion.span>;
 }
 
+/** スクロール量に合わせて文字を順に点灯させる。lines は行 > 文節の配列で、文節の途中では折り返さない */
 export default function ScrubText({ lines, className, lineClassName, phraseClassName, accentClassName }: Props) {
   const ref = useRef<HTMLParagraphElement>(null);
   const reduce = useReducedMotion();
@@ -50,8 +37,8 @@ export default function ScrubText({ lines, className, lineClassName, phraseClass
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      const startY = vh * START; // rect.top がここで 0
-      const endY = vh * END; // rect.bottom がここで 1
+      const startY = vh * START;
+      const endY = vh * END;
       const total = startY - endY + rect.height;
       const p = (startY - rect.top) / total;
       progress.set(Math.min(Math.max(p, 0), 1));

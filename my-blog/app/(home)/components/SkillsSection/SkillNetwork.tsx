@@ -4,27 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import styles from "./SkillNetwork.module.scss";
 
-/**
- * SkillNetwork — スキル同士のつながりを 3D の星座として見せるグラフィック
- *
- * ■ コンセプト
- *   「すべてのスキルはひとつの繋がった立体システムを成す」
- *   ・4 カテゴリのクラスタを "正四面体" の頂点に置き、中央のハブで束ねる
- *     (平面上の 4 点だと回転の角度によって潰れて平坦に見えるが、
- *      正四面体はどの角度から見ても立体として読める)
- *   ・クラスタ同士は四面体の辺 (6 本) で結び、立体の骨格を見せる
- *   ・各クラスタ内のノードも球面上に分布させ、塊としての量感を出す
- *   ・Y 軸回転 (≈52秒/周) + ゆっくり揺れる X 軸チルト。透視投影で奥行きを出す
- *
- * ■ ホバー連動
- *   リストのスキルにマウスを乗せると対応ノードが発光し、名前ラベルが表示される。
- *   接続しているノード・エッジ以外は減光してフォーカスを強調する。
- *
- * ■ 旧 GeometricShapes(skills) からの変更
- *   背景に薄く敷く装飾 → リストの隣に置く主役のグラフィックへ。
- *   正方形の構図に組み直し、カテゴリ名ラベルとホバー中のスキル名を表示。
- */
-
 export interface SkillCategoryInput {
   name: string;
   colorClass: string;
@@ -53,15 +32,12 @@ const RHO = 185;
 /** クラスタ内ノードの分布半径 */
 const CLUSTER_R = 62;
 /**
- * 投影後の縦方向の中心。四面体は頂点が上に 1 つ・底面が下にあり重心が上寄りに見えるため、
- * 全体が枠の中央に収まるよう少し下げる。
+  * 投影後の縦方向の中心。四面体は重心が上寄りに見えるので少し下げる
  */
 const CENTER_Y = CENTER + RHO * 0.32;
 
 /**
- * クラスタ中心 = 正四面体の頂点。
- * 頂点 0 を真上 (Frontend)、残り 3 つを下側の正三角形 (Backend / Design / Quality) に置く。
- * Y 軸回転の軸と四面体の軸が一致するので、回るたびに底面の三角形と頂点が入れ替わって見える。
+  * クラスタ中心 = 正四面体の頂点。0 が真上 (Frontend)、残り 3 つが下側の正三角形
  */
 const CLUSTER_CENTERS = [
   { cx: 0, cy: -RHO, cz: 0 },
@@ -90,8 +66,7 @@ interface Edge {
 }
 
 /**
- * フィボナッチ球面でクラスタ内ノードを配置 (乱数なしなので SSR/CSR で一致)。
- * ノード 0 はクラスタ中心 = カテゴリのアンカー。
+  * フィボナッチ球面で配置 (乱数なしで SSR/CSR を一致させる)。ノード 0 はアンカー
  */
 function generateCluster(cx: number, cy: number, cz: number, count: number) {
   const out: Array<{ x: number; y: number; z: number; r: number }> = [];
@@ -137,7 +112,7 @@ function buildNetwork(categories: SkillCategoryInput[]) {
   nodes.push({ x: 0, y: 0, z: 0, r: 9, color: "#eeeeee", skillName: null });
   anchors.forEach((a) => edges.push({ from: hubIndex, to: a, color: nodes[a].color }));
 
-  // ブリッジ: 四面体の 6 辺 = すべてのクラスタ同士を接続 ("分野横断の統合力" + 立体の骨格)
+  // ブリッジ: 四面体の 6 辺
   for (let a = 0; a < anchors.length; a++) {
     for (let b = a + 1; b < anchors.length; b++) {
       edges.push({ from: anchors[a], to: anchors[b], color: "#666" });
@@ -181,12 +156,12 @@ function GlowFilter({ id, color }: { id: string; color: string }) {
 
 const filterId = (color: string) => `sn-glow-${color.replace("#", "")}`;
 
+/** スキルのつながりを 3D の星座で見せる。リストのホバーで対応ノードと接続先を強調する */
 export default function SkillNetwork({ skillData, hoveredSkill = null }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const { nodes, edges, hubIndex } = useMemo(() => buildNetwork(skillData), [skillData]);
 
-  // 経過時間 (s)。回転角とチルトはここから導出する
   const [time, setTime] = useState(0);
   const [visible, setVisible] = useState(false);
 
@@ -224,7 +199,7 @@ export default function SkillNetwork({ skillData, hoveredSkill = null }: Props) 
     });
   }
   const focus = hoveredIndex >= 0;
-  // ≈52秒/周の Y 回転 + 上下にゆっくり揺れる俯瞰角 (常に少し上から見下ろす)
+  // ≈52秒/周の Y 回転 + 揺れる俯瞰角
   const angleY = 0.5 + time * 0.12;
   const tiltX = 0.4 + Math.sin(time * 0.25) * 0.12;
   const projected = project(nodes, angleY, tiltX);
@@ -245,7 +220,6 @@ export default function SkillNetwork({ skillData, hoveredSkill = null }: Props) 
           ))}
         </defs>
 
-        {/* 外周のガイド円 — 星図の "枠" */}
         <circle cx={CENTER} cy={CENTER} r={CENTER - 8} className={styles.orbit} />
         <circle cx={CENTER} cy={CENTER} r={CENTER * 0.62} className={styles.orbit} />
 

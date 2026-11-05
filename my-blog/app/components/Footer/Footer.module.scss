@@ -36,7 +36,6 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   font-family: $font-code;
 }
 
-// 5つのリンクは右寄せの横並び
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -64,12 +63,10 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
-// 現在地 (サイドメニューと同じく緑のアクセント)
 .link.active {
   color: $color-green;
 }
 
-// 右下 (コピーライトと同じ行) に絶対配置
 .toTop {
   position: absolute;
   right: $section-padding;
@@ -91,7 +88,7 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 // ==========================================
-// Wordmark — アウトラインの描画アニメーション
+// Wordmark
 // ==========================================
 .wordmark {
   margin: 56px 0 24px;

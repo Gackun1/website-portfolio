@@ -7,7 +7,6 @@ export const metadata = {
   title: "About - Gackun.",
 };
 
-/** About + Skills をまとめたプロフィールページ (トップと同じセクションを再利用) */
 export default function AboutPage() {
   return (
     <main className={styles.page}>

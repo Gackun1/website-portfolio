@@ -13,7 +13,6 @@ export default function SideMenu() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // ページ遷移したらモバイルメニューを閉じる
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
@@ -31,7 +30,7 @@ export default function SideMenu() {
 
   // トップにいるときの Home はページ遷移せず先頭へスクロール
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, item: NavItem) => {
-    if (!isHome || item.href !== "/") return; // それ以外はNext.jsナビゲーションに任せる
+    if (!isHome || item.href !== "/") return;
 
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });

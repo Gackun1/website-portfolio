@@ -24,7 +24,7 @@ $dot: 9px;
   padding: 0;
   list-style: none;
 
-  // ドット同士をつなぐ縦線 (最初と最後のドットの中心まで)
+  // 最初と最後のドットの中心を結ぶ
   &::before {
     content: "";
     position: absolute;
@@ -48,11 +48,11 @@ $dot: 9px;
   height: $dot;
   border: 1px solid $color-gray-1;
   border-radius: 50%;
-  // 縦線を隠しつつ、写真の上でも輪郭が見えるように暗い塗り
+  // 縦線を隠しつつ、写真の上でも輪郭が見えるように塗る
   background: $color-black-2;
   transition: background 0.3s ease, border-color 0.3s ease, transform 0.4s $ease, box-shadow 0.3s ease;
 
-  // 小さいドットでも押しやすいようにクリック範囲を広げる
+  // クリック範囲を広げる
   &::before {
     content: "";
     position: absolute;

@@ -14,8 +14,7 @@ type Props = {
 };
 
 /**
- * Bento グリッドの穴埋め
- * 先頭を大きく (3列: 2x2 / 2列: 横2) 見せ、最後の要素の横幅で余りセルを埋める。
+  * 先頭を大きく見せ、最後の要素の横幅で余りセルを埋める
  */
 function spanClasses(index: number, total: number) {
   const classes: string[] = [];
@@ -29,7 +28,6 @@ function spanClasses(index: number, total: number) {
   return classes.join(" ");
 }
 
-/** 制作実績のグリッド (Bento / 等サイズ) + 全体画像のポップアップ (トップ / 一覧ページ共通) */
 export default function WorksBento({ works, layout = "bento" }: Props) {
   const [openPopup, setOpenPopup] = useState<number | null>(null);
   const close = useCallback(() => setOpenPopup(null), []);
@@ -42,7 +40,6 @@ export default function WorksBento({ works, layout = "bento" }: Props) {
           {works.map((work, index) => (
             <StaggerItem key={work.slug} className={`${styles.cell} ${layout === "bento" ? spanClasses(index, works.length) : ""}`}>
               {work.secret ? (
-                // 画像非公開の案件: 拡大できないただのカード
                 <article className={`${styles.item} ${styles.secret}`}>
                   <span className={styles.secretLabel} aria-hidden="true">
                     SECRET

@@ -10,7 +10,6 @@ type Props = {
   posts: PostMeta[];
 };
 
-/** ブログ記事の罫線リスト (トップ / 一覧ページ共通) */
 export default function PostList({ posts }: Props) {
   return (
     <StaggerContainer className={styles.list} staggerDelay={0.08}>

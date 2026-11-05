@@ -75,7 +75,7 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   text-wrap: pretty;
 }
 
-// 図 — 2カラム時はスクロール中も追従させる
+// 2カラム時は図をスクロールに追従させる
 .diagram {
   position: sticky;
   top: 100px;
@@ -100,7 +100,6 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
   padding: 28px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
-  // ホバーで左から伸びるアクセントライン
   &::before {
     content: "";
     position: absolute;

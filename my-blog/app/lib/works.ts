@@ -11,7 +11,7 @@ export type WorkItem = {
   category: string;
   image: string;
   fullImage: string;
-  /** 画像を公開できない案件 (SECRET 表示・拡大なし) */
+  /** 画像非公開 (SECRET 表示) */
   secret: boolean;
   order: number;
 };

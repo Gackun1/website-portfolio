@@ -6,7 +6,6 @@ export const metadata = {
   title: "Contact - Gackun.",
 };
 
-/** お問い合わせページ (トップと同じフォームを再利用) */
 export default function ContactPage() {
   return (
     <main className={styles.page}>

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { homeSections, scrollToId } from "../../lib/nav";
 import styles from "./SectionIndicator.module.scss";
 
-/** トップページ右側のスクロール位置インジケーター (セクションごとのドットを縦線でつなぐ) */
 export default function SectionIndicator() {
   const [active, setActive] = useState(homeSections[0].id);
 

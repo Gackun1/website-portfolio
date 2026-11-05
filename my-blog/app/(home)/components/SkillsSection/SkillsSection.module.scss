@@ -12,7 +12,6 @@
   }
 }
 
-// スキルリスト (左) とネットワーク図 (右) を横並びに
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

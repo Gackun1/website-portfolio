@@ -4,16 +4,6 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, animate, motion, useAnimationFrame, useReducedMotion } from "framer-motion";
 import styles from "./AboutDiagram.module.scss";
 
-/**
- * AboutDiagram — Services の 3 領域をそれぞれ 1 枚の図で見せる
- *
- * 0. Frontend & CMS    : コンテンツ → コンポーネント → ビュー の 3 層を分解したアイソメトリック図
- * 1. Design & Motion   : イージングカーブと、その速度感で動くオブジェクト
- * 2. SEO & Performance : スコアリングと Core Web Vitals のメーター
- *
- * active は AboutSection 側のホバー / フォーカスで切り替わる。
- */
-
 export const DIAGRAM_COLORS = ["#a6e22e", "#66d9ef", "#e6db74"] as const;
 
 const VIEW_W = 480;
@@ -49,7 +39,6 @@ const LAYERS = [
 
 function LayerContent({ index, z, color }: { index: number; z: number; color: string }) {
   if (index === 0) {
-    // CMS のエントリー = key / value の行
     return (
       <>
         {[0, 1, 2, 3].map((i) => {
@@ -65,7 +54,6 @@ function LayerContent({ index, z, color }: { index: number; z: number; color: st
     );
   }
   if (index === 1) {
-    // 再利用できる部品のタイル
     const lit = new Set([0, 4, 5, 7]);
     return (
       <>
@@ -90,7 +78,6 @@ function LayerContent({ index, z, color }: { index: number; z: number; color: st
       </>
     );
   }
-  // ブラウザに描画された画面のワイヤーフレーム
   return (
     <>
       <polygon points={plane(0.08, 0.08, 0.92, 0.17, z)} fill="#eee" opacity={0.18} />
@@ -103,7 +90,6 @@ function LayerContent({ index, z, color }: { index: number; z: number; color: st
 }
 
 function StackDiagram({ color, still }: { color: string; still: boolean }) {
-  // 各レイヤーの手前・左右の角を縦に結ぶ — データが下から上へ流れる経路
   const corners: Array<[number, number]> = [
     [0, 1],
     [1, 1],
@@ -192,12 +178,10 @@ function EasingDiagram({ color, still }: { color: string; still: boolean }) {
   const p = bezier(u);
   const [x1, y1, x2, y2] = BEZIER;
   const curve = `M${gx(0)},${gy(0)} C${gx(x1)},${gy(y1)} ${gx(x2)},${gy(y2)} ${gx(1)},${gy(1)}`;
-  // 等間隔の時間で打ったゴースト = イージングの "間" を可視化
   const ghosts = Array.from({ length: 11 }, (_, i) => bezier(i / 10).y);
 
   return (
     <>
-      {/* 12 カラムのレイアウトグリッド */}
       {Array.from({ length: 12 }, (_, i) => (
         <rect key={i} x={30 + i * 36} y={20} width={24} height={VIEW_H - 40} className={styles.column} />
       ))}
@@ -215,7 +199,6 @@ function EasingDiagram({ color, still }: { color: string; still: boolean }) {
       <line x1={gx(0)} y1={gy(0)} x2={gx(1)} y2={gy(0)} className={styles.axis} />
       <line x1={gx(0)} y1={gy(0)} x2={gx(0)} y2={gy(1)} className={styles.axis} />
 
-      {/* ハンドル */}
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
         <line x1={gx(0)} y1={gy(0)} x2={gx(x1)} y2={gy(y1)} className={styles.handle} />
         <line x1={gx(1)} y1={gy(1)} x2={gx(x2)} y2={gy(y2)} className={styles.handle} />
@@ -234,12 +217,10 @@ function EasingDiagram({ color, still }: { color: string; still: boolean }) {
         transition={{ duration: 1.1, ease }}
       />
 
-      {/* 現在位置 */}
       <line x1={gx(p.x)} y1={gy(p.y)} x2={gx(0)} y2={gy(p.y)} className={styles.guide} stroke={color} />
       <line x1={gx(p.x)} y1={gy(p.y)} x2={gx(p.x)} y2={gy(0)} className={styles.guide} stroke={color} />
       <circle cx={gx(p.x)} cy={gy(p.y)} r={6} fill={color} className={styles.glow} style={{ color }} />
 
-      {/* トラック: 同じイージングで動くオブジェクト */}
       <line x1={gx(0)} y1={TRACK_Y} x2={gx(1)} y2={TRACK_Y} className={styles.axis} />
       {ghosts.map((g, i) => (
         <line key={i} x1={gx(g)} y1={TRACK_Y - 5} x2={gx(g)} y2={TRACK_Y + 5} className={styles.tick} />
@@ -274,7 +255,6 @@ function ScoreDiagram({ color, still }: { color: string; still: boolean }) {
 
   return (
     <>
-      {/* 目盛り */}
       {Array.from({ length: 60 }, (_, i) => {
         const a = (i / 60) * Math.PI * 2 - Math.PI / 2;
         const lit = i / 60 < score / 100;
@@ -352,6 +332,7 @@ function ScoreDiagram({ color, still }: { color: string; still: boolean }) {
 
 const LABELS = ["Frontend & CMS", "Design & Motion", "SEO & Performance"];
 
+/** Services の 3 領域を図で見せる。active は AboutSection のホバー / フォーカスで切り替わる */
 export default function AboutDiagram({ active }: { active: number }) {
   const reduced = useReducedMotion() ?? false;
   const color = DIAGRAM_COLORS[active];
@@ -374,7 +355,6 @@ export default function AboutDiagram({ active }: { active: number }) {
         </AnimatePresence>
       </svg>
 
-      {/* 四隅のトンボ */}
       <span className={`${styles.corner} ${styles.tl}`} />
       <span className={`${styles.corner} ${styles.tr}`} />
       <span className={`${styles.corner} ${styles.bl}`} />

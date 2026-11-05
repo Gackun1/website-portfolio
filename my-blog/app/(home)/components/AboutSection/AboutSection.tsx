@@ -7,15 +7,7 @@ import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import AboutDiagram, { DIAGRAM_COLORS } from "./AboutDiagram";
 import styles from "./AboutSection.module.scss";
 
-/**
- * About — "何者で、何を頼めて、どう仕事をするか" を伝えるセクション
- *
- * 1. Statement : スクロールに合わせて点灯する大きなリード文 (考え方)
- * 2. Diagram   : ホバー中の領域を図で見せる (AboutDiagram)
- * 3. Services  : 依頼できること 3 つ (何を頼めるか)
- */
-
-// 1行 = 1つの意味のまとまり。文節単位で区切り、狭い画面でも語の途中では折り返さない
+// 行 > 文節の配列。文節の途中では折り返さない
 const statement: Phrase[][] = [
   [{ text: "見た目の" }, { text: "美しさだけでなく、" }],
   [{ text: "使いやすさ、" }, { text: "速さ、" }, { text: "見つけてもらえること。" }],

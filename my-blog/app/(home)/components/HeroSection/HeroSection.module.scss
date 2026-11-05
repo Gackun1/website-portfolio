@@ -11,7 +11,6 @@ $ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   padding: $section-padding;
   box-sizing: border-box;
   overflow: hidden;
-  // 中心からわずかに青みを帯びた闇 — 粒子の発光が沈まないように
   background:
     radial-gradient(circle at 74% 46%, rgba($color-blue, 0.07) 0%, transparent 32%),
     radial-gradient(ellipse 80% 70% at 70% 45%, #20262b 0%, $color-bg-primary 70%);
@@ -24,7 +23,6 @@ $ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
-// 下端を次のセクションへ溶かし込む
 .vignette {
   position: absolute;
   inset: 0;

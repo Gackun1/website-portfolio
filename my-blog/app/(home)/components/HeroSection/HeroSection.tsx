@@ -13,10 +13,7 @@ const HEADING_LINES: Segment[][] = [
 ];
 const HEADING_LABEL = HEADING_LINES.map((line) => line.map((s) => s.text).join("")).join(" ");
 
-/**
- * Typewriter — 1文字ずつ打ち込まれる見出し
- * 未入力部分も visibility:hidden で確保しておき、レイアウトシフトとカーソル位置ズレを防ぐ。
- */
+/** 未入力部分も visibility:hidden で確保し、レイアウトシフトとカーソル位置のズレを防ぐ */
 function Typewriter() {
   const lineLengths = HEADING_LINES.map((line) => line.reduce((n, s) => n + s.text.length, 0));
   const total = lineLengths.reduce((a, b) => a + b, 0);
@@ -33,7 +30,7 @@ function Typewriter() {
       n += 1;
       setCount(n);
       if (n >= total) return;
-      // 行末では一拍おいて "考えながら打っている" リズムをつくる
+      // 行末で一拍おく
       const lineEnd = n === lineLengths[0];
       timer = setTimeout(step, lineEnd ? 380 : 70 + Math.random() * 70);
     };
@@ -85,7 +82,6 @@ const hudTransition = (delay: number) => ({
   transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
-/** MV のロゴビジュアル (components/LogoVisual) */
 const VISUALS = {
   particle: ParticleLogo, // WebGL パーティクル版
   pathPlus: PathLogoPlus, // パス描画のブラッシュアップ版
@@ -95,7 +91,6 @@ const VISUALS = {
 export type HeroVisual = keyof typeof VISUALS;
 
 interface Props {
-  /** ロゴビジュアルの種類 */
   visual?: HeroVisual;
   /** 背景の塵パーティクルを表示するか */
   dust?: boolean;

@@ -1,7 +1,3 @@
-/**
- * サイト共通のナビゲーション定義 (サイドメニュー / フッター)
- * すべてページ単位のリンク。
- */
 export type NavItem = {
   label: string;
   href: string;
@@ -22,9 +18,7 @@ export function isCurrentNav(item: NavItem, pathname: string): boolean {
   return pathname === item.match || pathname.startsWith(`${item.match}/`);
 }
 
-/**
- * トップページのセクション (右側のスクロール位置インジケーター用)
- */
+/** トップページのセクション (SectionIndicator 用) */
 export const homeSections = [
   { id: "top", label: "Home" },
   { id: "about", label: "About" },
@@ -34,14 +28,12 @@ export const homeSections = [
   { id: "contact", label: "Contact" },
 ];
 
-/** 同じページ内のアンカーへスムーススクロール */
 export function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: "smooth" });
 }
 
-/** SNS アカウント (サイドメニュー) */
 export const snsLinks = [
   { label: "Instagram", href: "https://www.instagram.com/gaku090707/", icon: "/img/i_instagram.png" },
   { label: "X", href: "https://x.com/gakugaku_gackun", icon: "/img/i_x.svg" },

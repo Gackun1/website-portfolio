@@ -3,7 +3,7 @@
 $ease: cubic-bezier(0.22, 1, 0.36, 1);
 
 // ==========================================
-// Article list — エディトリアルな罫線リスト
+// Article list
 // ==========================================
 .list {
   margin-top: 40px;
@@ -24,7 +24,6 @@ $ease: cubic-bezier(0.22, 1, 0.36, 1);
     display: none;
   }
 
-  // ホバー時に左から差し込む面
   &::before {
     content: "";
     position: absolute;
