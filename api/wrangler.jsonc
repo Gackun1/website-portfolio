@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
   "vars": {
     "MAIL_TO": "gaku.yoshikawa@gmail.com",
     "ALLOWED_ORIGINS": "https://gackun.com,http://localhost:3000"
