@@ -9,6 +9,8 @@ import styles from "./WorksBento.module.scss";
 
 type Props = {
   works: WorkItem[];
+  /** bento: 先頭を大きく見せる (トップ) / grid: 等サイズの3カラム (一覧) */
+  layout?: "bento" | "grid";
 };
 
 /**
@@ -27,8 +29,8 @@ function spanClasses(index: number, total: number) {
   return classes.join(" ");
 }
 
-/** 制作実績の Bento グリッド + 全体画像のポップアップ (トップ / 一覧ページ共通) */
-export default function WorksBento({ works }: Props) {
+/** 制作実績のグリッド (Bento / 等サイズ) + 全体画像のポップアップ (トップ / 一覧ページ共通) */
+export default function WorksBento({ works, layout = "bento" }: Props) {
   const [openPopup, setOpenPopup] = useState<number | null>(null);
   const close = useCallback(() => setOpenPopup(null), []);
   const current = openPopup !== null ? works[openPopup] : null;
@@ -38,7 +40,7 @@ export default function WorksBento({ works }: Props) {
       <div className={styles.gridWrap}>
         <StaggerContainer className={styles.grid} staggerDelay={0.1}>
           {works.map((work, index) => (
-            <StaggerItem key={work.slug} className={`${styles.cell} ${spanClasses(index, works.length)}`}>
+            <StaggerItem key={work.slug} className={`${styles.cell} ${layout === "bento" ? spanClasses(index, works.length) : ""}`}>
               <article
                 className={styles.item}
                 role="button"

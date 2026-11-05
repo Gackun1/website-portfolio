@@ -10,7 +10,7 @@ import { getAllWorks } from "../lib/works";
 
 export default function Home() {
   const posts = getAllPosts();
-  const works = getAllWorks();
+  const works = getAllWorks().slice(0, 3); // トップは3件、残りは一覧ページで
 
   return (
     <main>

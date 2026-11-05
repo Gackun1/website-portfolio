@@ -22,7 +22,7 @@ export default function WorksArchive() {
           サムネイルを選択すると、ページ全体のデザインをご覧いただけます。
         </p>
       </div>
-      <WorksBento works={works} />
+      <WorksBento works={works} layout="grid" />
     </main>
   );
 }
