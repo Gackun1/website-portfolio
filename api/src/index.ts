@@ -10,6 +10,8 @@ interface Env {
 
 type Handler = (request: Request, env: Env) => Promise<Response>;
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const INQUIRY_LABELS: Record<string, string> = {
   request: "ご依頼",
   consultation: "ご相談",
@@ -17,16 +19,19 @@ const INQUIRY_LABELS: Record<string, string> = {
 };
 
 const contactForm: Handler = async (request, env) => {
-  let body: { inquiryType?: string; name?: string; content?: string };
+  let body: { inquiryType?: string; name?: string; email?: string; content?: string };
   try {
     body = await request.json();
   } catch {
     return Response.json({ error: "不正なリクエストです" }, { status: 400 });
   }
 
-  const { inquiryType, name, content } = body;
-  if (!inquiryType || !name || !content) {
+  const { inquiryType, name, email, content } = body;
+  if (!inquiryType || !name || !email || !content) {
     return Response.json({ error: "すべての項目を入力してください" }, { status: 400 });
+  }
+  if (!EMAIL_PATTERN.test(email)) {
+    return Response.json({ error: "メールアドレスの形式が正しくありません" }, { status: 400 });
   }
 
   if (!env.GMAIL_USER || !env.GMAIL_APP_PASSWORD) {
@@ -35,6 +40,8 @@ const contactForm: Handler = async (request, env) => {
   }
 
   const label = INQUIRY_LABELS[inquiryType] ?? inquiryType;
+  // 件名はヘッダーなので改行を除く
+  const subjectName = name.replace(/[\r\n]+/g, " ");
 
   try {
     const mailer = await WorkerMailer.connect({
@@ -47,8 +54,9 @@ const contactForm: Handler = async (request, env) => {
     await mailer.send({
       from: env.GMAIL_USER,
       to: env.MAIL_TO,
-      subject: `【ポートフォリオ】${label} - ${name}`,
-      text: [`お問い合わせ目的: ${label}`, `お名前: ${name}`, ``, `--- お問い合わせ内容 ---`, content].join("\n"),
+      reply: email,
+      subject: `【ポートフォリオ】${label} - ${subjectName}`,
+      text: [`お問い合わせ目的: ${label}`, `お名前: ${name}`, `メールアドレス: ${email}`, ``, `--- お問い合わせ内容 ---`, content].join("\n"),
     });
     await mailer.close();
   } catch (error) {

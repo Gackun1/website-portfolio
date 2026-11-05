@@ -8,11 +8,13 @@ import TerminalButton from "../../../components/TerminalButton/TerminalButton";
 import styles from "./ContactSection.module.scss";
 
 const CONTACT_API_URL = "https://api.gackun.com/v1/contact-form/";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     inquiryType: "",
     name: "",
+    email: "",
     content: "",
   });
   const [formResult, setFormResult] = useState("");
@@ -24,8 +26,12 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.inquiryType || !formData.name || !formData.content) {
+    if (!formData.inquiryType || !formData.name || !formData.email || !formData.content) {
       setFormResult("error");
+      return;
+    }
+    if (!EMAIL_PATTERN.test(formData.email)) {
+      setFormResult("error-email");
       return;
     }
 
@@ -41,7 +47,7 @@ export default function ContactSection() {
 
       if (res.ok) {
         setFormResult("success");
-        setFormData({ inquiryType: "", name: "", content: "" });
+        setFormData({ inquiryType: "", name: "", email: "", content: "" });
       } else {
         setFormResult("error-send");
       }
@@ -82,6 +88,13 @@ export default function ContactSection() {
               <input id="name" type="text" name="name" value={formData.name} onChange={(e) => handleInputChange("name", e.target.value)} />
             </div>
             <div className={styles.formItem}>
+              <label htmlFor="email" className={styles.formLabel}>
+                <span className={styles.terminalPrefix}>$ </span>
+                メールアドレス
+              </label>
+              <input id="email" type="email" name="email" autoComplete="email" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} />
+            </div>
+            <div className={styles.formItem}>
               <label htmlFor="content" className={styles.formLabel}>
                 <span className={styles.terminalPrefix}>$ </span>
                 お問い合わせ内容
@@ -104,6 +117,9 @@ export default function ContactSection() {
               </div>
               <div className={styles.terminalRow}>
                 userName: <span className={styles.yellow}>&apos;{formData.name}&apos;</span>,
+              </div>
+              <div className={styles.terminalRow}>
+                email: <span className={styles.yellow}>&apos;{formData.email}&apos;</span>,
               </div>
               <div className={styles.terminalRow}>
                 body: <span className={styles.yellow}>&apos;{formData.content}&apos;</span>
@@ -131,6 +147,11 @@ export default function ContactSection() {
                 {formResult === "error" && (
                   <motion.span key="error" className={styles.red} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
                     error! Please enter all of the items.
+                  </motion.span>
+                )}
+                {formResult === "error-email" && (
+                  <motion.span key="error-email" className={styles.red} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
+                    error! Please enter a valid email address.
                   </motion.span>
                 )}
                 {formResult === "error-send" && (
