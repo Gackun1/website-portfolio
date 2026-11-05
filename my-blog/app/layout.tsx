@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.scss";
 import styles from "./layout.module.scss";
 import SideMenu from "./components/SideMenu/SideMenu";
 import Footer from "./components/Footer/Footer";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import { fontVariables } from "./lib/fonts";
+
+const GTM_ID = "GTM-W5RBT2DZ";
 
 export const metadata: Metadata = {
   title: "Gackun. — Frontend Developer & Designer",
@@ -23,6 +26,14 @@ export default function RootLayout({
   return (
     <html lang="ja" className={fontVariables}>
       <body>
+        {/* Google Tag Manager */}
+        <Script id="gtm-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });`}
+        </Script>
+        <Script src={`https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`} strategy="afterInteractive" />
         <SideMenu />
         <ScrollProgress />
         <div className={styles.container}>
